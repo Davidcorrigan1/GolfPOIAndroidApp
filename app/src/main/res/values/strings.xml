@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GolfPOI</string>
+    <string name="button_addGolfPOI">Add Golf Course</string>
+    <string name="hint_golfPOITitle">Golf Course Title</string>
+    <string name="hint_golfPOIDesc">Golf Course Description</string>
 </resources>

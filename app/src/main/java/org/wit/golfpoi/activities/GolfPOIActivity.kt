@@ -4,14 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import org.wit.golfpoi.databinding.ActivityGolfpoiBinding
+import org.wit.golfpoi.main.MainApp
 import org.wit.golfpoi.models.GolfPOIModel
 import timber.log.Timber
 import timber.log.Timber.i
 
 class GolfPOIActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGolfpoiBinding
-    val golfPOIs = ArrayList<GolfPOIModel>()
     var golfPOI = GolfPOIModel()
+    lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,14 +21,20 @@ class GolfPOIActivity : AppCompatActivity() {
 
         Timber.plant(Timber.DebugTree())
 
-        i("GOLFPOI Activity started..")
+        app = application as MainApp
+
+        i("GOLF POI Activity started..")
 
         binding.btnAdd.setOnClickListener() {
             golfPOI.courseTitle = binding.golfPOITitle.text.toString()
             golfPOI.courseDescription = binding.golfPOIDesc.text.toString()
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
                 i("add Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
-                golfPOIs.add(golfPOI.copy())
+                app.golfPOIs.add(golfPOI.copy())
+
+                for (i in app.golfPOIs.indices) {
+                    i("Golf Course [$i] : ${app.golfPOIs[i]}")
+                }
             } else {
                 Snackbar
                     .make(it, "Please enter a Title and Desc", Snackbar.LENGTH_LONG)

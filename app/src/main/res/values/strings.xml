@@ -3,4 +3,7 @@
     <string name="button_addGolfPOI">Add Golf Course</string>
     <string name="hint_golfPOITitle">Golf Course Title</string>
     <string name="hint_golfPOIDesc">Golf Course Description</string>
+    <string name="menu_addGolfPOI">Add</string>
+    <string name="menu_cancelGolfPOI">Cancel</string>
+
 </resources>

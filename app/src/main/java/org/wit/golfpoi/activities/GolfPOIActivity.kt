@@ -37,11 +37,7 @@ class GolfPOIActivity : AppCompatActivity() {
             golfPOI.courseDescription = binding.golfPOIDesc.text.toString()
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
                 i("add Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
-                app.golfPOIs.add(golfPOI.copy())
-
-                for (i in app.golfPOIs.indices) {
-                    i("Golf Course [$i] : ${app.golfPOIs[i]}")
-                }
+                app.golfPOIs.create(golfPOI.copy())
                 setResult(RESULT_OK)
                 finish()
             } else {

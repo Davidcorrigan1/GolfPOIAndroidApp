@@ -8,10 +8,12 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.golfpoi.R
 import org.wit.golfpoi.adapter.GolfPOIAdapter
+import org.wit.golfpoi.adapter.GolfPOIListener
 import org.wit.golfpoi.databinding.ActivityGolfPoilistBinding
 import org.wit.golfpoi.main.MainApp
+import org.wit.golfpoi.models.GolfPOIModel
 
-class GolfPOIListActivity : AppCompatActivity() {
+class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityGolfPoilistBinding
@@ -33,7 +35,7 @@ class GolfPOIListActivity : AppCompatActivity() {
         // Set the recyclerView layout and link the adapter
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIs)
+        binding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIs.findAll(), this)
 
 
     }
@@ -53,5 +55,10 @@ class GolfPOIListActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onGolfPOIClick(golfPOI: GolfPOIModel) {
+        val launcherIntent = Intent(this, GolfPOIActivity::class.java)
+        startActivityForResult(launcherIntent,0)
     }
 }

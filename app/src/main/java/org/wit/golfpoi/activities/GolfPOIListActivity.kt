@@ -59,6 +59,12 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
 
     override fun onGolfPOIClick(golfPOI: GolfPOIModel) {
         val launcherIntent = Intent(this, GolfPOIActivity::class.java)
+        launcherIntent.putExtra("golfpoi_edit", golfPOI)
         startActivityForResult(launcherIntent,0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

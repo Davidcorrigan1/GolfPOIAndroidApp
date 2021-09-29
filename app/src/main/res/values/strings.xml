@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">GolfPOI</string>
-    <string name="button_addGolfPOI">Add Golf Course</string>
+    <string name="button_addGolfPOI">ADD COURSE DETAILS</string>
     <string name="hint_golfPOITitle">Golf Course Title</string>
     <string name="hint_golfPOIDesc">Golf Course Description</string>
     <string name="menu_addGolfPOI">Add</string>
     <string name="menu_cancelGolfPOI">Cancel</string>
+    <string name="prompt_addGolfPOI">Please enter a Title and Desc</string>
+    <string name="button_saveGolfPOI">SAVE COURSE DETAILS</string>
 
 </resources>

@@ -19,6 +19,7 @@ class GolfPOIActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var editFlag : Boolean = false
         binding = ActivityGolfpoiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -27,17 +28,31 @@ class GolfPOIActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         Timber.plant(Timber.DebugTree())
-
         app = application as MainApp
 
         i("GOLF POI Activity started..")
 
+        // Are we coming from the List Activity with Data being passed via Parcelize...
+        if (intent.hasExtra("golfpoi_edit")) {
+            golfPOI = intent.extras?.getParcelable("golfpoi_edit")!!
+            binding.golfPOITitle.setText(golfPOI.courseTitle)
+            binding.golfPOIDesc.setText(golfPOI.courseDescription)
+            binding.btnAdd.setText(R.string.button_saveGolfPOI)
+            editFlag = true
+        }
+
+        // Listener and action for the button
         binding.btnAdd.setOnClickListener() {
             golfPOI.courseTitle = binding.golfPOITitle.text.toString()
             golfPOI.courseDescription = binding.golfPOIDesc.text.toString()
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
-                i("add Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
-                app.golfPOIs.create(golfPOI.copy())
+                if (editFlag) {
+                    i("save Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
+                    app.golfPOIs.update(golfPOI.copy())
+                } else {
+                    i("add Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
+                    app.golfPOIs.create(golfPOI.copy())
+                }
                 setResult(RESULT_OK)
                 finish()
             } else {

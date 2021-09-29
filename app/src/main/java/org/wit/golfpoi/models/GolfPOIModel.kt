@@ -1,4 +1,9 @@
 package org.wit.golfpoi.models
 
-data class GolfPOIModel(var courseTitle: String = "",
-                        var courseDescription: String = "")
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class GolfPOIModel(var id: Long = 0,
+                        var courseTitle: String = "",
+                        var courseDescription: String = "") : Parcelable

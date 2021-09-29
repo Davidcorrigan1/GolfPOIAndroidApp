@@ -15,8 +15,8 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Golf POI started")
-        golfPOIs.create(GolfPOIModel("Wexford GOlf Course", "Beautiful par 70"))
-        golfPOIs.create(GolfPOIModel("Cork GOlf Course", "Beautiful par 71"))
-        golfPOIs.create(GolfPOIModel("Galway GOlf Course", "Beautiful par 72"))
+        golfPOIs.create(GolfPOIModel(1000,"Wexford GOlf Course", "Beautiful par 70"))
+        golfPOIs.create(GolfPOIModel(1001,"Cork GOlf Course", "Beautiful par 71"))
+        golfPOIs.create(GolfPOIModel(1002,"Galway GOlf Course", "Beautiful par 72"))
     }
 }

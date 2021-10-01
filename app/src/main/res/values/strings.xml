@@ -7,5 +7,11 @@
     <string name="menu_cancelGolfPOI">Cancel</string>
     <string name="prompt_addGolfPOI">Please enter a Title and Desc</string>
     <string name="button_saveGolfPOI">SAVE COURSE DETAILS</string>
-
+    <string name="selected_item">Selected item:</string>
+    <string-array name="provinces">
+        <item>Leinster</item>
+        <item>Munster</item>
+        <item>Connaght</item>
+        <item>Ulster</item>
+    </string-array>
 </resources>

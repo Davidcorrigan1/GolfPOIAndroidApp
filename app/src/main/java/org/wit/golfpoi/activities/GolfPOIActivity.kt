@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.google.android.material.snackbar.Snackbar
 import org.wit.golfpoi.R
 import org.wit.golfpoi.databinding.ActivityGolfpoiBinding
@@ -19,7 +23,8 @@ class GolfPOIActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var editFlag : Boolean = false
+        var editFlag = false
+
         binding = ActivityGolfpoiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -39,6 +44,30 @@ class GolfPOIActivity : AppCompatActivity() {
             binding.golfPOIDesc.setText(golfPOI.courseDescription)
             binding.btnAdd.setText(R.string.button_saveGolfPOI)
             editFlag = true
+        }
+
+        // Dropdown of Provinces taken from the strings resource file
+        val provinces = resources.getStringArray(R.array.provinces)
+        val spinner : Spinner = findViewById(R.id.provinceSpinner)
+
+        // If the spinner object created, create an ArrayAdapter object with the dropdown type
+        // and populate using the list of the provinces.
+        if (spinner != null) {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, provinces)
+            spinner.adapter = adapter
+            var spinnerPosition : Int = adapter.getPosition("Munster")
+            spinner.setSelection(spinnerPosition)
+        }
+
+        // Listener for the spinner dropdown for provinces
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                i("Selected: ${getString(R.string.selected_item)} ${provinces[p2]}" )
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                i("nothing selected")
+            }
         }
 
         // Listener and action for the button

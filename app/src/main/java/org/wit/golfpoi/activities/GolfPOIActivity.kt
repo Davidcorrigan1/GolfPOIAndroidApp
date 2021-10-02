@@ -86,10 +86,10 @@ class GolfPOIActivity : AppCompatActivity() {
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
                 if (editFlag) {
                     i("save Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
-                    app.golfPOIs.update(golfPOI.copy())
+                    app.golfPOIs.updatePOI(golfPOI.copy())
                 } else {
                     i("add Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
-                    app.golfPOIs.create(golfPOI.copy())
+                    app.golfPOIs.createPOI(golfPOI.copy())
                 }
                 setResult(RESULT_OK)
                 finish()

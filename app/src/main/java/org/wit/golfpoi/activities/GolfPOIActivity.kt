@@ -24,6 +24,7 @@ class GolfPOIActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var editFlag = false
+        var setProvinces : String = ""
 
         binding = ActivityGolfpoiBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -35,6 +36,17 @@ class GolfPOIActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree())
         app = application as MainApp
 
+        // creating objects needed for the spinner drop down
+        // Dropdown of Provinces taken from the strings resource file
+        val provinces = resources.getStringArray(R.array.provinces)
+        val spinner : Spinner = findViewById(R.id.provinceSpinner)
+
+        // Create an ArrayAdapter object with the dropdown type
+        // and populate using the list of the provinces.
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, provinces)
+        spinner.adapter = adapter
+
         i("GOLF POI Activity started..")
 
         // Are we coming from the List Activity with Data being passed via Parcelize...
@@ -43,26 +55,21 @@ class GolfPOIActivity : AppCompatActivity() {
             binding.golfPOITitle.setText(golfPOI.courseTitle)
             binding.golfPOIDesc.setText(golfPOI.courseDescription)
             binding.btnAdd.setText(R.string.button_saveGolfPOI)
-            editFlag = true
-        }
 
-        // Dropdown of Provinces taken from the strings resource file
-        val provinces = resources.getStringArray(R.array.provinces)
-        val spinner : Spinner = findViewById(R.id.provinceSpinner)
-
-        // If the spinner object created, create an ArrayAdapter object with the dropdown type
-        // and populate using the list of the provinces.
-        if (spinner != null) {
-            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, provinces)
-            spinner.adapter = adapter
-            var spinnerPosition : Int = adapter.getPosition("Munster")
+            // check the current selected provence and default to that one!
+            var spinnerPosition : Int = adapter.getPosition(golfPOI.courseProvince)
             spinner.setSelection(spinnerPosition)
+            i("Setting the dropdown default from model value")
+
+            editFlag = true
         }
 
         // Listener for the spinner dropdown for provinces
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 i("Selected: ${getString(R.string.selected_item)} ${provinces[p2]}" )
+                setProvinces = provinces[p2]
+                i("The selected provence is: $setProvinces")
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -74,6 +81,8 @@ class GolfPOIActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             golfPOI.courseTitle = binding.golfPOITitle.text.toString()
             golfPOI.courseDescription = binding.golfPOIDesc.text.toString()
+            golfPOI.courseProvince = setProvinces.toString()
+            i("Setting the model province to $setProvinces")
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
                 if (editFlag) {
                     i("save Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")

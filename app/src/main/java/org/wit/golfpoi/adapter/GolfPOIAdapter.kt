@@ -37,6 +37,7 @@ class GolfPOIAdapter constructor(private var golfPOIs: List<GolfPOIModel>,
         fun bind(golfPOI: GolfPOIModel, listener: GolfPOIListener) {
             binding.golfPOITitle.text = golfPOI.courseTitle
             binding.golfPOIDesc.text = golfPOI.courseDescription
+            binding.golfPOIProvince.text = golfPOI.courseProvince
             binding.root.setOnClickListener { listener.onGolfPOIClick(golfPOI) }
         }
     }

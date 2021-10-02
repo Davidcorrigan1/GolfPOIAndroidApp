@@ -43,9 +43,9 @@
                 <EditText
                     android:id="@+id/golfPOITitle"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="48dp"
                     android:layout_margin="8dp"
-                    android:autofillHints=""
+                    android:autofillHints="test hint"
                     android:hint="@string/hint_golfPOITitle"
                     android:inputType="text"
                     android:maxLength="25"
@@ -53,19 +53,27 @@
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
+
                 <EditText
                     android:id="@+id/golfPOIDesc"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_margin="8dp"
-                    android:autofillHints=""
+                    android:autofillHints="test hint"
                     android:hint="@string/hint_golfPOIDesc"
                     android:inputType="text"
-                    android:maxLength="250"
+                    android:maxLength="25"
                     android:maxLines="5"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/provinceSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"/>
 
                 <Button
                     android:id="@+id/btnAdd"
@@ -78,7 +86,7 @@
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addGolfPOI"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="#3949AB"
                     android:textSize="16sp" />
 
             </LinearLayout>

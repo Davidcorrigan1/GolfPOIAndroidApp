@@ -29,6 +29,7 @@ class GolfPOIMemStore : GolfPOIStore {
         if (foundGolfPOI != null) {
             foundGolfPOI.courseTitle = golfPOI.courseTitle
             foundGolfPOI.courseDescription = golfPOI.courseDescription
+            foundGolfPOI.courseProvince = golfPOI.courseProvince
             logAll()
         }
     }

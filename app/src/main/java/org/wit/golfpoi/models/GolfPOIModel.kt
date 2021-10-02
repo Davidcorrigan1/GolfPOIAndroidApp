@@ -6,4 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class GolfPOIModel(var id: Long = 0,
                         var courseTitle: String = "",
-                        var courseDescription: String = "") : Parcelable
+                        var courseDescription: String = "",
+                        var courseProvince: String = "") : Parcelable

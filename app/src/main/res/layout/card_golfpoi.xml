@@ -21,10 +21,18 @@
             tools:text="Course Title" />
 
         <TextView
-            android:id="@+id/golfPOIDesc"
+            android:id="@+id/golfPOIProvince"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/golfPOITitle"
+            android:textSize="20sp"
+            tools:text="Course Province" />
+
+        <TextView
+            android:id="@+id/golfPOIDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/golfPOIProvince"
             tools:text="Course Description" />
 
     </RelativeLayout>

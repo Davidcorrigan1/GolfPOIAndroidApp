@@ -8,6 +8,8 @@
     <string name="prompt_addGolfPOI">Please enter a Title and Desc</string>
     <string name="button_saveGolfPOI">SAVE COURSE DETAILS</string>
     <string name="selected_item">Selected item:</string>
+    <string name="button_addImage"> Add Course Image </string>
+    <string name="select_golfPOI_image">Select Course image</string>
     <string-array name="provinces">
         <item>Leinster</item>
         <item>Munster</item>

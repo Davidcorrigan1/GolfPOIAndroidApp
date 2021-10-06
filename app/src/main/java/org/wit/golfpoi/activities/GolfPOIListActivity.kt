@@ -68,6 +68,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
         startActivityForResult(launcherIntent,0)
     }
 
+    // Instruct the adapter that the Data model has updated data.
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         binding.recyclerView.adapter?.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)

@@ -1,5 +1,6 @@
 package org.wit.golfpoi.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,9 +9,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.wit.golfpoi.R
 import org.wit.golfpoi.databinding.ActivityGolfpoiBinding
+import org.wit.golfpoi.helpers.showImagePicker
 import org.wit.golfpoi.main.MainApp
 import org.wit.golfpoi.models.GolfPOIModel
 import timber.log.Timber
@@ -18,6 +23,8 @@ import timber.log.Timber.i
 
 class GolfPOIActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGolfpoiBinding
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+
     var golfPOI = GolfPOIModel()
     lateinit var app : MainApp
 
@@ -47,7 +54,7 @@ class GolfPOIActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, provinces)
         spinner.adapter = adapter
 
-        i("GOLF POI Activity started..")
+        i("GOLFPOI Activity started..")
 
         // Are we coming from the List Activity with Data being passed via Parcelize...
         if (intent.hasExtra("golfpoi_edit")) {
@@ -55,6 +62,7 @@ class GolfPOIActivity : AppCompatActivity() {
             binding.golfPOITitle.setText(golfPOI.courseTitle)
             binding.golfPOIDesc.setText(golfPOI.courseDescription)
             binding.btnAdd.setText(R.string.button_saveGolfPOI)
+            Picasso.get().load(golfPOI.image).into(binding.golfPOIImage)
 
             // check the current selected provence and default to that one!
             var spinnerPosition : Int = adapter.getPosition(golfPOI.courseProvince)
@@ -95,11 +103,18 @@ class GolfPOIActivity : AppCompatActivity() {
                 finish()
             } else {
                 Snackbar
-                    .make(it, "Please enter a Title and Desc", Snackbar.LENGTH_LONG)
+                    .make(it, R.string.prompt_addGolfPOI, Snackbar.LENGTH_LONG)
                     .show()
             }
 
         }
+
+        // Listener for the Add Image button
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+
+        registerImagePickerCallback()
     }
 
     // Inflate the menu
@@ -116,5 +131,24 @@ class GolfPOIActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    // Register a callback along with the contract that defines its input (and output) types
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            golfPOI.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(golfPOI.image)
+                                .into(binding.golfPOIImage)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 }

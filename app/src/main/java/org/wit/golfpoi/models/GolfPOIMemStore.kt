@@ -54,7 +54,9 @@ class GolfPOIMemStore : GolfPOIStore {
     // Use the email address to find a user if it exists, if found check the
     // password matches the supplied. If match return the user object else null.
     override fun findUser(email: String, password: String): GolfUserModel? {
-        var userFound: GolfUserModel? = users.find{ p -> p.userEmail.equals(email)}
+        i("user entered Email: $email")
+        var userFound: GolfUserModel? = users.find{ it.userEmail == email }
+        i("userFound: ${userFound}")
         if (userFound != null) {
             if (userFound.userPassword.equals(password)) {
                 return userFound

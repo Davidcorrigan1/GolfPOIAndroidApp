@@ -26,7 +26,7 @@ class GolfPOILoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener() {
             i("Check the user exists and check password")
-            var loggedInUser: GolfUserModel? = app.golfPOIs.findUser(binding.editTextEmail.toString(),binding.editTextPassword.toString())
+            var loggedInUser: GolfUserModel? = app.golfPOIs.findUser(binding.editTextEmail.text.toString(),binding.editTextPassword.text.toString())
             if (loggedInUser != null) {
                 val launcherIntent = Intent(this, GolfPOIListActivity::class.java)
                 //launcherIntent.putExtra("loggedin_user", user)

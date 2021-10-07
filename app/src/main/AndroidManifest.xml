@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GolfPOI">
         <activity
-            android:name=".activities.GolfPOIListActivity"
+            android:name=".activities.GolfPOILoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +20,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.GolfPOIListActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".activities.GolfPOIActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

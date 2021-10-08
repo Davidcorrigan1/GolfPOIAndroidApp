@@ -57,12 +57,12 @@
                 <EditText
                     android:id="@+id/golfPOIDesc"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="100dp"
                     android:layout_margin="8dp"
                     android:autofillHints="test hint"
                     android:hint="@string/hint_golfPOIDesc"
-                    android:inputType="text"
-                    android:maxLength="25"
+                    android:inputType="textMultiLine"
+                    android:maxLength="250"
                     android:maxLines="5"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
@@ -92,7 +92,7 @@
                     android:id="@+id/golfPOIImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"/>
+                    app:srcCompat="@mipmap/ic_launcher_round"/>
 
                 <Button
                     android:id="@+id/btnAdd"

@@ -142,6 +142,8 @@ class GolfPOIActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             golfPOI.image = result.data!!.data!!
+                            i("result.data.data: ${result.data!!.data!!}")
+                            i("golfPOI.image: ${golfPOI.image}")
                             Picasso.get()
                                 .load(golfPOI.image)
                                 .into(binding.golfPOIImage)

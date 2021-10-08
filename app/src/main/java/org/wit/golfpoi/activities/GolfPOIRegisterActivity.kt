@@ -3,7 +3,7 @@ package org.wit.golfpoi.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import org.wit.golfpoi.R
 import org.wit.golfpoi.databinding.ActivityGolfPoiregisterBinding
@@ -28,24 +28,43 @@ class GolfPOIRegisterActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener() {
             Timber.i("Check the user already exists for email address")
-            var existingUser: GolfUserModel? = app.golfPOIs.findUser(binding.editTextEmail.text.toString())
+            val existingUser: GolfUserModel? = app.golfPOIs.findUser(binding.editTextEmail.text.toString())
             if (existingUser == null) {
-                user.userEmail = binding.editTextEmail.text.toString()
-                user.firstName = binding.editTextFirstName.text.toString()
-                user.lastName = binding.editTextLastName.text.toString()
-                user.userPassword = binding.editTextPassword.text.toString()
-                user.lastLoginDate = LocalDate.now()
-                user.loginCount = 1
-                app.golfPOIs.createUser(user)
+                if (binding.editTextEmail.text.toString() != "" &&
+                    binding.editTextFirstName.text.toString() != "" &&
+                    binding.editTextLastName.text.toString() != "" &&
+                    binding.editTextPassword.text.toString() != "") {
+                    user.userEmail = binding.editTextEmail.text.toString()
+                    user.firstName = binding.editTextFirstName.text.toString()
+                    user.lastName = binding.editTextLastName.text.toString()
+                    user.userPassword = binding.editTextPassword.text.toString()
+                    user.lastLoginDate = LocalDate.now()
+                    user.loginCount = 1
+                    app.golfPOIs.createUser(user)
 
-                val launcherIntent = Intent(this, GolfPOIListActivity::class.java)
-                //launcherIntent.putExtra("loggedin_user", user)
-                startActivityForResult(launcherIntent, 0)
+                    val launcherIntent = Intent(this, GolfPOIListActivity::class.java)
+                    //launcherIntent.putExtra("loggedin_user", user)
+                    startActivityForResult(launcherIntent, 0)
+                } else {
+                    Snackbar
+                        .make(it, R.string.register_input_message, Snackbar.LENGTH_LONG)
+                        .show()
+                }
+
             } else {
                 Snackbar
                     .make(it, R.string.register_error_message, Snackbar.LENGTH_LONG)
                     .show()
             }
+        }
+
+        binding.btnLogin.setOnClickListener() {
+            Timber.i("Sending user to Login")
+
+            val launcherIntent = Intent(this, GolfPOILoginActivity::class.java)
+            //launcherIntent.putExtra("loggedin_user", user)
+            startActivityForResult(launcherIntent, 0)
+
         }
     }
 }

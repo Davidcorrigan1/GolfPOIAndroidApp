@@ -106,6 +106,18 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/colorAccentLight"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="To Login Screen"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
 
         </LinearLayout>
     </ScrollView>

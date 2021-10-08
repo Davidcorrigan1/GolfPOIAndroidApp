@@ -16,6 +16,7 @@
     <string name="register_lastname_hint">Surname Name</string>
     <string name="login_error_message">The entered email or password are invalid</string>
     <string name="register_error_message">This email address is already registered, please login</string>
+    <string name="register_input_message">Please ensure all fields are completed before you continue</string>
     <string-array name="provinces">
         <item>Leinster</item>
         <item>Munster</item>

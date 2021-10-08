@@ -32,6 +32,7 @@ class GolfPOIMemStore : GolfPOIStore {
             foundGolfPOI.courseTitle = golfPOI.courseTitle
             foundGolfPOI.courseDescription = golfPOI.courseDescription
             foundGolfPOI.courseProvince = golfPOI.courseProvince
+            foundGolfPOI.image = golfPOI.image
             logAll()
         }
     }
@@ -53,19 +54,19 @@ class GolfPOIMemStore : GolfPOIStore {
 
     // Use the email address to find a user if it exists, if found check the
     // password matches the supplied. If match return the user object else null.
-    override fun findUser(email: String, password: String): GolfUserModel? {
+    override fun findUser(email: String): GolfUserModel? {
         i("user entered Email: $email")
         var userFound: GolfUserModel? = users.find{ it.userEmail == email }
         i("userFound: ${userFound}")
         if (userFound != null) {
-            if (userFound.userPassword.equals(password)) {
-                return userFound
-            }
+            return userFound
+        } else {
             userFound = null
         }
         return userFound
     }
 
+    // Log the existing Golf Courses
     fun logAll() {
         golfPOIs.forEach{(i("${it}"))}
     }

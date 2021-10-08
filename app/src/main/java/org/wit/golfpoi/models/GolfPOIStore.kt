@@ -8,6 +8,6 @@ interface GolfPOIStore {
     fun removePOI(position: Int)
 
     fun createUser(user: GolfUserModel)
-    fun findUser(email: String, password: String): GolfUserModel?
+    fun findUser(email: String): GolfUserModel?
 
 }

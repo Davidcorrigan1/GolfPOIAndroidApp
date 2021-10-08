@@ -26,16 +26,27 @@ class GolfPOILoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener() {
             i("Check the user exists and check password")
-            var loggedInUser: GolfUserModel? = app.golfPOIs.findUser(binding.editTextEmail.text.toString(),binding.editTextPassword.text.toString())
-            if (loggedInUser != null) {
-                val launcherIntent = Intent(this, GolfPOIListActivity::class.java)
-                //launcherIntent.putExtra("loggedin_user", user)
-                startActivityForResult(launcherIntent,0)
+            var loggedInUser: GolfUserModel? = app.golfPOIs.findUser(binding.editTextEmail.text.toString())
+
+            if (loggedInUser != null && (loggedInUser.userPassword.equals(binding.editTextPassword.text.toString()))) {
+                    val launcherIntent = Intent(this, GolfPOIListActivity::class.java)
+                    //launcherIntent.putExtra("loggedin_user", user)
+                    startActivityForResult(launcherIntent, 0)
+
             } else {
                 Snackbar
                     .make(it, R.string.login_error_message, Snackbar.LENGTH_LONG)
                     .show()
             }
+        }
+
+        binding.btnRegister.setOnClickListener() {
+            i("Sending user to register")
+
+            val launcherIntent = Intent(this, GolfPOIRegisterActivity::class.java)
+            //launcherIntent.putExtra("loggedin_user", user)
+            startActivityForResult(launcherIntent, 0)
+
         }
     }
 

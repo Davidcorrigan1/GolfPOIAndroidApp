@@ -47,15 +47,21 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
 
     // Overload method to load the menu resource
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_golfpoilist, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     // Implements a menu event handler; if the event is item_add then the GolfPOIActivity is started
+    // Implements a logout button which will return to the login screen acticity
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, GolfPOIActivity::class.java)
+                startActivityForResult(launcherIntent,0)
+            }
+
+            R.id.item_logout -> {
+                val launcherIntent = Intent(this, GolfPOILoginActivity::class.java)
                 startActivityForResult(launcherIntent,0)
             }
         }
@@ -73,6 +79,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
         binding.recyclerView.adapter?.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
     }
+
 
     // Method to handle deleting an item with a swipe
     private fun setRecyclerViewItemTouchListener() {

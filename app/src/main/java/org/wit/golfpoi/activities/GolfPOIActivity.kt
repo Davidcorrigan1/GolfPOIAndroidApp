@@ -129,6 +129,11 @@ class GolfPOIActivity : AppCompatActivity() {
             R.id.item_cancel -> {
                 finish()
             }
+            R.id.item_logout -> {
+                val launcherIntent = Intent(this, GolfPOILoginActivity::class.java)
+                //launcherIntent.putExtra("loggedin_user", user)
+                startActivityForResult(launcherIntent, 0)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

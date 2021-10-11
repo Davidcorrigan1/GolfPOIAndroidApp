@@ -47,7 +47,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
 
     // Overload method to load the menu resource
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_golfpoilist, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

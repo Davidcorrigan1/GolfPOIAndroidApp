@@ -1,10 +1,14 @@
 package org.wit.golfpoi.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import org.wit.golfpoi.R
 import org.wit.golfpoi.databinding.CardGolfpoiBinding
 import org.wit.golfpoi.models.GolfPOIModel
+import timber.log.Timber.i
 
 // new interface will represent click events on the GolfPOI Card,
 // and allow us to abstract the response to this event
@@ -35,6 +39,14 @@ class GolfPOIAdapter constructor(private var golfPOIs: List<GolfPOIModel>,
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(golfPOI: GolfPOIModel, listener: GolfPOIListener) {
+
+            if (golfPOI.image != null) {
+                if (golfPOI.image.equals(Uri.EMPTY)) {
+                    binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+                } else {
+                    Picasso.get().load(golfPOI.image).centerCrop().fit().into(binding.imageIcon)
+                }
+            }
             binding.golfPOITitle.text = golfPOI.courseTitle
             binding.golfPOIDesc.text = golfPOI.courseDescription
             binding.golfPOIProvince.text = golfPOI.courseProvince

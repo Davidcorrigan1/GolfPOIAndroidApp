@@ -54,6 +54,10 @@ class GolfPOIActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, provinces)
         spinner.adapter = adapter
 
+        // Set the Range for the Course Par picker
+        binding.golfPOIparPicker.minValue = 70
+        binding.golfPOIparPicker.maxValue = 72
+
         i("GOLFPOI Activity started..")
 
         // Are we coming from the List Activity with Data being passed via Parcelize...
@@ -61,6 +65,7 @@ class GolfPOIActivity : AppCompatActivity() {
             golfPOI = intent.extras?.getParcelable("golfpoi_edit")!!
             binding.golfPOITitle.setText(golfPOI.courseTitle)
             binding.golfPOIDesc.setText(golfPOI.courseDescription)
+            binding.golfPOIparPicker.value = golfPOI.coursePar
             binding.btnAdd.setText(R.string.button_saveGolfPOI)
             Picasso.get().load(golfPOI.image).into(binding.golfPOIImage)
 
@@ -89,7 +94,9 @@ class GolfPOIActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             golfPOI.courseTitle = binding.golfPOITitle.text.toString()
             golfPOI.courseDescription = binding.golfPOIDesc.text.toString()
-            golfPOI.courseProvince = setProvinces.toString()
+            golfPOI.courseProvince = setProvinces
+            golfPOI.coursePar = binding.golfPOIparPicker.value
+
             i("Setting the model province to $setProvinces")
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
                 if (editFlag) {
@@ -114,6 +121,7 @@ class GolfPOIActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
 
+        //callback to the image picker
         registerImagePickerCallback()
     }
 

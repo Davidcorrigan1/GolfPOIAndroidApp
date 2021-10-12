@@ -5,12 +5,14 @@
         <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorSecondary">@color/colorAccent</item>
+        <item name="android:itemBackground">@color/colorAccent</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textColorSecondary">@color/colorAccent</item>
     </style>
+
     <style name="viewParent">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -33,12 +35,16 @@
     </style>
     <style name="loginButton" parent="viewParent">
         <item name="android:background">@drawable/button_background_blue</item>
-        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="spinnerHintText" parent="parent">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:paddingLeft">5dp</item>
+    </style>
+    <style name="MyDarkToolbarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorBackground">@color/colorAccentLight</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 </resources>

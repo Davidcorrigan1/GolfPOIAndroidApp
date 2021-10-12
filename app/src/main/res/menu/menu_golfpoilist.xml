@@ -7,11 +7,13 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/menu_addGolfPOI"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:popupTheme="@style/MyDarkToolbarStyle"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/item_logout"
         android:title="@string/menu_logoutGolfPOI"
         android:orderInCategory="150"
-        app:showAsAction="never"/>
+        app:popupTheme="@style/MyDarkToolbarStyle"
+        app:showAsAction="always"/>
 </menu>

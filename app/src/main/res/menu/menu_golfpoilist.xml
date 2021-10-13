@@ -6,10 +6,14 @@
         android:id="@+id/item_add"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/menu_addGolfPOI"
-        app:showAsAction="always" />
+        android:orderInCategory="100"
+        app:popupTheme="@style/MyDarkToolbarStyle"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/item_logout"
         android:title="@string/menu_logoutGolfPOI"
+        android:orderInCategory="150"
+        app:popupTheme="@style/MyDarkToolbarStyle"
         app:showAsAction="always"/>
 </menu>

@@ -9,4 +9,5 @@ data class GolfPOIModel(var id: Long = 0,
                         var courseTitle: String = "",
                         var courseDescription: String = "",
                         var courseProvince: String = "",
+                        var coursePar: Int = 0,
                         var image: Uri = Uri.EMPTY) : Parcelable

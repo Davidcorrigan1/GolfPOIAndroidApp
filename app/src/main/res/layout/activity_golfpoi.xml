@@ -51,7 +51,7 @@
                     android:maxLength="25"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:textSize="14sp" />
 
                 <EditText
@@ -65,17 +65,72 @@
                     android:maxLength="250"
                     android:maxLines="5"
                     android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:textSize="14sp" />
 
-                <Spinner
-                    android:id="@+id/provinceSpinner"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:padding="8dp"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
 
+
+                    <TextView
+                        android:id="@+id/golfPOIProvinceText"
+                        android:layout_width="match_parent"
+                        android:layout_height="47dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="3"
+                        android:text="Province"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/provinceSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_margin="8dp"
+                        android:padding="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintEnd_toEndOf="@id/golfPOIProvinceText"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+
+                    <TextView
+                        android:id="@+id/golfPOIParText"
+                        android:layout_width="match_parent"
+                        android:layout_height="78dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="25dp"
+                        android:text="Course \nPar"
+                        android:layout_weight="3"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp" />
+
+                    <NumberPicker
+                        android:id="@+id/golfPOIparPicker"
+                        android:layout_width="match_parent"
+                        android:layout_height="94dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/golfPOIParText"
+                        app:layout_constraintHorizontal_bias="0.973"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.333" />
+                </LinearLayout>
                 <Button
                     android:id="@+id/chooseImage"
                     android:layout_width="match_parent"

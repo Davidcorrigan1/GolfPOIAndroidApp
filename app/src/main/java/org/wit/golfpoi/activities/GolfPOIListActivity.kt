@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityGolfPoilistBinding
+    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,8 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIs.findAllPOIs(), this)
 
+        registerRefreshCallback()
+
         setRecyclerViewItemTouchListener()
     }
 
@@ -57,29 +62,25 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, GolfPOIActivity::class.java)
-                startActivityForResult(launcherIntent,0)
+                //startActivityForResult(launcherIntent,0)
+                refreshIntentLauncher.launch(launcherIntent)
             }
 
             R.id.item_logout -> {
                 val launcherIntent = Intent(this, GolfPOILoginActivity::class.java)
                 startActivityForResult(launcherIntent,0)
+                refreshIntentLauncher.launch(launcherIntent)
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    // The onGolfPOIClick listener.
     override fun onGolfPOIClick(golfPOI: GolfPOIModel) {
         val launcherIntent = Intent(this, GolfPOIActivity::class.java)
         launcherIntent.putExtra("golfpoi_edit", golfPOI)
-        startActivityForResult(launcherIntent,0)
+        refreshIntentLauncher.launch(launcherIntent)
     }
-
-    // Instruct the adapter that the Data model has updated data.
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        binding.recyclerView.adapter?.notifyDataSetChanged()
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
 
     // Method to handle deleting an item with a swipe
     private fun setRecyclerViewItemTouchListener() {
@@ -108,6 +109,13 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
         //4
         val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }
+
+    // Register the Callback Function
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { binding.recyclerView.adapter?.notifyDataSetChanged() }
     }
 
 }

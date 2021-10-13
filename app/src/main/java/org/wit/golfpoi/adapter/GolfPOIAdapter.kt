@@ -45,7 +45,8 @@ class GolfPOIAdapter constructor(private var golfPOIs: List<GolfPOIModel>,
                 if (golfPOI.image.equals(Uri.EMPTY)) {
                     binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
                 } else {
-                    Picasso.get().load(golfPOI.image).centerCrop().fit().into(binding.imageIcon)
+                    //Picasso.get().load(golfPOI.image).centerCrop().fit().into(binding.imageIcon)
+                    Picasso.get().load(golfPOI.image).resize(200,200).into(binding.imageIcon)
                 }
             }
             binding.golfPOITitle.text = golfPOI.courseTitle

@@ -1,10 +1,7 @@
 package org.wit.golfpoi.activities
 
 import android.content.Intent
-import android.graphics.BlendMode
-import android.graphics.BlendModeColorFilter
-import android.graphics.Color.BLUE
-import android.graphics.PorterDuff
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -73,6 +70,11 @@ class GolfPOIActivity : AppCompatActivity() {
             binding.btnAdd.setText(R.string.button_saveGolfPOI)
             Picasso.get().load(golfPOI.image).into(binding.golfPOIImage)
 
+            // If coming from the list of courses and Course image already set, change button text
+            if (golfPOI.image != Uri.EMPTY) {
+                binding.btnChooseImage.setText(R.string.change_golfPOI_image)
+            }
+
             // check the current selected provence and default to that one!
             var spinnerPosition : Int = adapter.getPosition(golfPOI.courseProvince)
             spinner.setSelection(spinnerPosition)
@@ -94,7 +96,7 @@ class GolfPOIActivity : AppCompatActivity() {
             }
         }
 
-        // Listener and action for the button
+        // Listener and action for the Add GOlf Course button
         binding.btnAdd.setOnClickListener() {
             golfPOI.courseTitle = binding.golfPOITitle.text.toString()
             golfPOI.courseDescription = binding.golfPOIDesc.text.toString()
@@ -121,8 +123,12 @@ class GolfPOIActivity : AppCompatActivity() {
         }
 
         // Listener for the Add Image button
-        binding.chooseImage.setOnClickListener {
+        binding.btnChooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
+        }
+
+        binding.btnGolfPOILocation.setOnClickListener {
+            i ("Set Location Pressed")
         }
 
         //callback to the image picker

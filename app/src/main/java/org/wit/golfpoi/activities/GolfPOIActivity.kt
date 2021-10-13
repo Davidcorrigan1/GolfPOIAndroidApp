@@ -25,6 +25,7 @@ import timber.log.Timber.i
 class GolfPOIActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGolfpoiBinding
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     var golfPOI = GolfPOIModel()
     lateinit var app : MainApp
@@ -129,10 +130,15 @@ class GolfPOIActivity : AppCompatActivity() {
 
         binding.btnGolfPOILocation.setOnClickListener {
             i ("Set Location Pressed")
+            val launcherIntent = Intent(this, GolfPOIMapActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
         }
 
         //callback to the image picker
         registerImagePickerCallback()
+
+        //Callback to the location selection
+        registerMapCallback()
     }
 
     // Inflate the menu
@@ -175,5 +181,12 @@ class GolfPOIActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    // Register Callback
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
     }
 }

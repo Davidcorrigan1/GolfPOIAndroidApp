@@ -140,7 +140,7 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/button_addImage"
-                    android:textColor="#212121"
+                    android:textColor="@color/colorAccent"
                     android:textSize="16sp" />
 
                 <ImageView
@@ -159,7 +159,7 @@
                     android:paddingTop="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_location"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorAccent"
                     android:textSize="16sp"/>
 
                 <Button
@@ -173,7 +173,7 @@
                     android:paddingBottom="8dp"
                     android:stateListAnimator="@null"
                     android:text="@string/button_addGolfPOI"
-                    android:textColor="#3949AB"
+                    android:textColor="@color/colorAccent"
                     android:textSize="16sp" />
 
             </LinearLayout>

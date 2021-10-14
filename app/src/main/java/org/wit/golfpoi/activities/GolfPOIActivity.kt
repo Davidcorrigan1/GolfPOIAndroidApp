@@ -19,6 +19,7 @@ import org.wit.golfpoi.databinding.ActivityGolfpoiBinding
 import org.wit.golfpoi.helpers.showImagePicker
 import org.wit.golfpoi.main.MainApp
 import org.wit.golfpoi.models.GolfPOIModel
+import org.wit.golfpoi.models.Location
 import timber.log.Timber
 import timber.log.Timber.i
 
@@ -29,7 +30,7 @@ class GolfPOIActivity : AppCompatActivity() {
 
     var golfPOI = GolfPOIModel()
     lateinit var app : MainApp
-
+    var location = Location("Current", 52.245696, -7.139102, 15f)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var editFlag = false
@@ -130,7 +131,14 @@ class GolfPOIActivity : AppCompatActivity() {
 
         binding.btnGolfPOILocation.setOnClickListener {
             i ("Set Location Pressed")
+            if (golfPOI.lat != 0.0 && golfPOI.lng != 0.0) {
+                location.lat = golfPOI.lat
+                location.lng = golfPOI.lng
+                location.zoom = golfPOI.zoom
+                location.name = golfPOI.courseTitle
+            }
             val launcherIntent = Intent(this, GolfPOIMapActivity::class.java)
+                                .putExtra("Location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
 
@@ -187,6 +195,22 @@ class GolfPOIActivity : AppCompatActivity() {
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { i("Map Loaded") }
+            {
+                result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            location = result.data!!.extras?.getParcelable("location")!!
+                            golfPOI.lat = location.lat
+                            golfPOI.lng = location.lng
+                            golfPOI.zoom = location.zoom
+                        }
+                    }
+
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+
     }
 }

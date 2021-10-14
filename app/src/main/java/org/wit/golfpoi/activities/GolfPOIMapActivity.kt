@@ -17,7 +17,7 @@ import org.wit.golfpoi.databinding.ActivityGolfPoimapsBinding
 import org.wit.golfpoi.models.Location
 import timber.log.Timber.i
 
-class GolfPOIMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
+class GolfPOIMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityGolfPoimapsBinding
@@ -64,10 +64,12 @@ class GolfPOIMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
     }
 
     override fun onMarkerDragStart(marker: Marker) {
-
+        val loc = LatLng(location.lat, location.lng)
+        marker.snippet = "GPS: : $loc"
     }
 
     override fun onMarkerDrag(marker: Marker) {
+
 
     }
 
@@ -75,6 +77,14 @@ class GolfPOIMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
+        val loc = LatLng(location.lat, location.lng)
+        marker.snippet = "GPS: : $loc"
         i("Moved marker: ${location.lat} ")
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        marker.snippet = "GPS: : $loc"
+        return true
     }
 }

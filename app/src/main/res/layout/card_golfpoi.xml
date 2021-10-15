@@ -41,6 +41,15 @@
             tools:text="Course Province" />
 
         <TextView
+            android:id="@+id/golfPOIPar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/golfPOITitle"
+            android:layout_toEndOf="@+id/golfPOIProvince"
+            android:textSize="20sp"
+            tools:text="Par 72" />
+
+        <TextView
             android:id="@+id/golfPOIDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -40,16 +40,20 @@ class GolfPOIAdapter constructor(private var golfPOIs: List<GolfPOIModel>,
 
         fun bind(golfPOI: GolfPOIModel, listener: GolfPOIListener) {
 
+            // Show default image if none available
             if (golfPOI.image != null) {
                 if (golfPOI.image.equals(Uri.EMPTY)) {
                     binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
                 } else {
-                    Picasso.get().load(golfPOI.image).centerCrop().fit().into(binding.imageIcon)
+                    //Picasso.get().load(golfPOI.image).centerCrop().fit().into(binding.imageIcon)
+                    Picasso.get().load(golfPOI.image).resize(200,200).into(binding.imageIcon)
                 }
             }
             binding.golfPOITitle.text = golfPOI.courseTitle
             binding.golfPOIDesc.text = golfPOI.courseDescription
             binding.golfPOIProvince.text = golfPOI.courseProvince
+
+            binding.golfPOIPar.text = "  Par: ${golfPOI.coursePar}"
             binding.root.setOnClickListener { listener.onGolfPOIClick(golfPOI) }
         }
     }

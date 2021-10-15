@@ -32,7 +32,11 @@ class GolfPOIMemStore : GolfPOIStore {
             foundGolfPOI.courseTitle = golfPOI.courseTitle
             foundGolfPOI.courseDescription = golfPOI.courseDescription
             foundGolfPOI.courseProvince = golfPOI.courseProvince
+            foundGolfPOI.coursePar = golfPOI.coursePar
             foundGolfPOI.image = golfPOI.image
+            foundGolfPOI.lat = golfPOI.lat
+            foundGolfPOI.lng = golfPOI.lng
+            foundGolfPOI.zoom = golfPOI.zoom
             logAll()
         }
     }

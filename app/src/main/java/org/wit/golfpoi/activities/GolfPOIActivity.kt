@@ -1,6 +1,7 @@
 package org.wit.golfpoi.activities
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -18,16 +19,18 @@ import org.wit.golfpoi.databinding.ActivityGolfpoiBinding
 import org.wit.golfpoi.helpers.showImagePicker
 import org.wit.golfpoi.main.MainApp
 import org.wit.golfpoi.models.GolfPOIModel
+import org.wit.golfpoi.models.Location
 import timber.log.Timber
 import timber.log.Timber.i
 
 class GolfPOIActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGolfpoiBinding
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     var golfPOI = GolfPOIModel()
     lateinit var app : MainApp
-
+    var location = Location("Current", 52.245696, -7.139102, 15f)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var editFlag = false
@@ -54,6 +57,10 @@ class GolfPOIActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, provinces)
         spinner.adapter = adapter
 
+        // Set the Range for the Course Par picker
+        binding.golfPOIparPicker.minValue = 70
+        binding.golfPOIparPicker.maxValue = 72
+
         i("GOLFPOI Activity started..")
 
         // Are we coming from the List Activity with Data being passed via Parcelize...
@@ -61,8 +68,14 @@ class GolfPOIActivity : AppCompatActivity() {
             golfPOI = intent.extras?.getParcelable("golfpoi_edit")!!
             binding.golfPOITitle.setText(golfPOI.courseTitle)
             binding.golfPOIDesc.setText(golfPOI.courseDescription)
+            binding.golfPOIparPicker.value = golfPOI.coursePar
             binding.btnAdd.setText(R.string.button_saveGolfPOI)
             Picasso.get().load(golfPOI.image).into(binding.golfPOIImage)
+
+            // If coming from the list of courses and Course image already set, change button text
+            if (golfPOI.image != Uri.EMPTY) {
+                binding.btnChooseImage.setText(R.string.change_golfPOI_image)
+            }
 
             // check the current selected provence and default to that one!
             var spinnerPosition : Int = adapter.getPosition(golfPOI.courseProvince)
@@ -85,11 +98,13 @@ class GolfPOIActivity : AppCompatActivity() {
             }
         }
 
-        // Listener and action for the button
+        // Listener and action for the Add GOlf Course button
         binding.btnAdd.setOnClickListener() {
             golfPOI.courseTitle = binding.golfPOITitle.text.toString()
             golfPOI.courseDescription = binding.golfPOIDesc.text.toString()
-            golfPOI.courseProvince = setProvinces.toString()
+            golfPOI.courseProvince = setProvinces
+            golfPOI.coursePar = binding.golfPOIparPicker.value
+
             i("Setting the model province to $setProvinces")
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
                 if (editFlag) {
@@ -110,11 +125,28 @@ class GolfPOIActivity : AppCompatActivity() {
         }
 
         // Listener for the Add Image button
-        binding.chooseImage.setOnClickListener {
+        binding.btnChooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
 
+        binding.btnGolfPOILocation.setOnClickListener {
+            i ("Set Location Pressed")
+            if (golfPOI.lat != 0.0 && golfPOI.lng != 0.0) {
+                location.lat = golfPOI.lat
+                location.lng = golfPOI.lng
+                location.zoom = golfPOI.zoom
+                location.name = golfPOI.courseTitle
+            }
+            val launcherIntent = Intent(this, GolfPOIMapActivity::class.java)
+                                .putExtra("Location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
+        //callback to the image picker
         registerImagePickerCallback()
+
+        //Callback to the location selection
+        registerMapCallback()
     }
 
     // Inflate the menu
@@ -157,5 +189,28 @@ class GolfPOIActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    // Register Callback
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            {
+                result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            location = result.data!!.extras?.getParcelable("location")!!
+                            golfPOI.lat = location.lat
+                            golfPOI.lng = location.lng
+                            golfPOI.zoom = location.zoom
+                        }
+                    }
+
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+
     }
 }

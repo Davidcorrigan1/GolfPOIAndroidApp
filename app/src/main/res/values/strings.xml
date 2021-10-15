@@ -6,17 +6,20 @@
     <string name="menu_addGolfPOI">Add</string>
     <string name="menu_cancelGolfPOI">Cancel</string>
     <string name="menu_logoutGolfPOI">Logout</string>
+    <string name="menu_mapGolfPOI">Map</string>
     <string name="prompt_addGolfPOI">Please enter a Title and Desc</string>
     <string name="button_saveGolfPOI">SAVE COURSE DETAILS</string>
     <string name="selected_item">Selected item:</string>
     <string name="button_addImage"> Add Course Image </string>
     <string name="select_golfPOI_image">Select Course image</string>
+    <string name="change_golfPOI_image">Change Course image</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="register_firstname_hint">First Name</string>
     <string name="register_lastname_hint">Surname Name</string>
+    <string name="button_location">Set Course Location</string>
     <string name="login_error_message">The entered email or password are invalid</string>
-    <string name="register_error_message">This email address is already registered, please login</string>
+    <string name="register_error_message">This email address is already registered, please use another or proceed to the login screen</string>
     <string name="register_input_message">Please ensure all fields are completed before you continue</string>
     <string-array name="provinces">
         <item>Leinster</item>
@@ -24,4 +27,6 @@
         <item>Connaght</item>
         <item>Ulster</item>
     </string-array>
+    <string name="title_activity_golf_poimaps">GolfPOIMapsActivity</string>
+    <string name="title_activity_golf_poioverview_map">GolfPOIOverviewMapActivity</string>
 </resources>

@@ -1,5 +1,6 @@
 package org.wit.golfpoi.activities
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -69,6 +70,16 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
             R.id.item_logout -> {
                 val launcherIntent = Intent(this, GolfPOILoginActivity::class.java)
                 startActivityForResult(launcherIntent,0)
+                refreshIntentLauncher.launch(launcherIntent)
+            }
+
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, GolfPOIOverviewMapActivity::class.java)
+                var mapLocations = arrayListOf<GolfPOIModel>()
+                for (golfPOI in app.golfPOIs.findAllPOIs()) {
+                    mapLocations.add(golfPOI)
+                }
+                launcherIntent.putParcelableArrayListExtra("MapLocations", mapLocations)
                 refreshIntentLauncher.launch(launcherIntent)
             }
         }

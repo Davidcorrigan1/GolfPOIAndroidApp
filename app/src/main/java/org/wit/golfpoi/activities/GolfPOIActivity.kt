@@ -35,16 +35,17 @@ class GolfPOIActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var editFlag = false
         var setProvinces : String = ""
+        app = application as MainApp
 
         binding = ActivityGolfpoiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Bind the toolbar and set the title
-        binding.toolbarAdd.title = title
+        // binding.toolbarAdd.title = title
+        binding.toolbarAdd.title = app.golfPOIData.getCurrentUser().firstName
         setSupportActionBar(binding.toolbarAdd)
 
         Timber.plant(Timber.DebugTree())
-        app = application as MainApp
 
         // creating objects needed for the spinner drop down
         // Dropdown of Provinces taken from the strings resource file

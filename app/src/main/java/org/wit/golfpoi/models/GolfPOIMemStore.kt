@@ -22,6 +22,7 @@ class GolfPOIMemStore : GolfPOIStore {
     // Add the passed in golfPOI object to the Arraylist in MemStore
     override fun createPOI(golfPOI: GolfPOIModel) {
         golfPOI.id = getId()
+        golfPOI.createdById = currentUser.id
         golfPOIs.add(golfPOI)
         logAll()
     }

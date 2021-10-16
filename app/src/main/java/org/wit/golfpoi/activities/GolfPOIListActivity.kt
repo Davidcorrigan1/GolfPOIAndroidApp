@@ -28,9 +28,6 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialise the app object
-        app = application as MainApp
-
         // Inflate the layout and Bind it to the activity
         binding = ActivityGolfPoilistBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -39,10 +36,14 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
         binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
 
+        // Initialise the app object
+        app = application as MainApp
+
         // Set the recyclerView layout and link the adapter
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIData.findAllPOIs(), this)
+
 
         // Plant timber for logging
         Timber.plant(Timber.DebugTree())

@@ -10,4 +10,7 @@ interface GolfPOIStore {
     fun createUser(user: GolfUserModel)
     fun findUser(email: String): GolfUserModel?
 
+    fun setCurrentUser(user: GolfUserModel)
+    fun getCurrentUser() : GolfUserModel
+
 }

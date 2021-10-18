@@ -41,10 +41,11 @@ class GolfPOIActivity : AppCompatActivity() {
 
         // Bind the toolbar and set the title
         binding.toolbarAdd.title = title
+        //binding.toolbarAdd.title = app.golfPOIData.getCurrentUser().firstName
         setSupportActionBar(binding.toolbarAdd)
 
-        Timber.plant(Timber.DebugTree())
         app = application as MainApp
+        Timber.plant(Timber.DebugTree())
 
         // creating objects needed for the spinner drop down
         // Dropdown of Provinces taken from the strings resource file
@@ -109,10 +110,10 @@ class GolfPOIActivity : AppCompatActivity() {
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
                 if (editFlag) {
                     i("save Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
-                    app.golfPOIs.updatePOI(golfPOI.copy())
+                    app.golfPOIData.updatePOI(golfPOI.copy())
                 } else {
                     i("add Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
-                    app.golfPOIs.createPOI(golfPOI.copy())
+                    app.golfPOIData.createPOI(golfPOI.copy())
                 }
                 setResult(RESULT_OK)
                 finish()

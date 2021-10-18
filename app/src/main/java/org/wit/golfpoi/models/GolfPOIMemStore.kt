@@ -13,6 +13,7 @@ class GolfPOIMemStore : GolfPOIStore {
 
     private val golfPOIs = ArrayList<GolfPOIModel>()
     private val users = ArrayList<GolfUserModel>()
+    private var currentUser : GolfUserModel = GolfUserModel()
 
     override fun findAllPOIs(): List<GolfPOIModel> {
         return golfPOIs
@@ -21,6 +22,7 @@ class GolfPOIMemStore : GolfPOIStore {
     // Add the passed in golfPOI object to the Arraylist in MemStore
     override fun createPOI(golfPOI: GolfPOIModel) {
         golfPOI.id = getId()
+        golfPOI.createdById = currentUser.id
         golfPOIs.add(golfPOI)
         logAll()
     }
@@ -68,6 +70,15 @@ class GolfPOIMemStore : GolfPOIStore {
             userFound = null
         }
         return userFound
+    }
+
+    // Set the passed in user to be the current User
+    override fun setCurrentUser(user: GolfUserModel) {
+        currentUser = user
+    }
+
+    override fun getCurrentUser(): GolfUserModel {
+        return currentUser
     }
 
     // Log the existing Golf Courses

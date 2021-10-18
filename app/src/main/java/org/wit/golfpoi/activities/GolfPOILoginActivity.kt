@@ -26,12 +26,14 @@ class GolfPOILoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener() {
             i("Check the user exists and check password")
-            var loggedInUser: GolfUserModel? = app.golfPOIs.findUser(binding.editTextEmail.text.toString())
+            var loggedInUser: GolfUserModel? = app.golfPOIData.findUser(binding.editTextEmail.text.toString())
 
             if (loggedInUser != null && (loggedInUser.userPassword.equals(binding.editTextPassword.text.toString()))) {
-                    val launcherIntent = Intent(this, GolfPOIListActivity::class.java)
-                    //launcherIntent.putExtra("loggedin_user", user)
-                    startActivityForResult(launcherIntent, 0)
+
+                app.golfPOIData.setCurrentUser(loggedInUser)
+                val launcherIntent = Intent(this, GolfPOIListActivity::class.java)
+                //launcherIntent.putExtra("loggedin_user", user)
+                startActivityForResult(launcherIntent, 0)
 
             } else {
                 Snackbar

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/golfLoginFragment">
+
+    <fragment
+        android:id="@+id/golfLoginFragment"
+        android:name="org.wit.golfpoi.fragments.GolfLoginFragment"
+        android:label="fragment_golf_login"
+        tools:layout="@layout/fragment_golf_login" >
+        <action
+            android:id="@+id/action_golfLoginFragment_to_golfPoiListFragment"
+            app:destination="@id/golfPoiListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/golfPoiListFragment"
+        android:name="org.wit.golfpoi.fragments.GolfPoiListFragment"
+        android:label="fragment_golf_poi_list"
+        tools:layout="@layout/fragment_golf_poi_list" />
+    <fragment
+        android:id="@+id/golfPoiRegisterFragment"
+        android:name="org.wit.golfpoi.fragments.GolfPoiRegisterFragment"
+        android:label="fragment_golf_poi_register"
+        tools:layout="@layout/fragment_golf_poi_register" />
+</navigation>

@@ -1,6 +1,5 @@
 package org.wit.golfpoi.activities
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,12 +38,15 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
 
         // Initialise the app object
         app = application as MainApp
-        Timber.plant(Timber.DebugTree())
 
         // Set the recyclerView layout and link the adapter
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIs.findAllPOIs(), this)
+        binding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIData.findAllPOIs(), this)
+
+
+        // Plant timber for logging
+        Timber.plant(Timber.DebugTree())
 
         registerRefreshCallback()
 
@@ -76,7 +78,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
             R.id.item_map -> {
                 val launcherIntent = Intent(this, GolfPOIOverviewMapActivity::class.java)
                 var mapLocations = arrayListOf<GolfPOIModel>()
-                for (golfPOI in app.golfPOIs.findAllPOIs()) {
+                for (golfPOI in app.golfPOIData.findAllPOIs()) {
                     mapLocations.add(golfPOI)
                 }
                 launcherIntent.putParcelableArrayListExtra("MapLocations", mapLocations)
@@ -111,7 +113,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
                 // Finally, you inform the RecyclerView adapter that an item has been removed at a specific position
                 val position = viewHolder.adapterPosition
                 i("Deleting Item At position $position")
-                app.golfPOIs.removePOI(position)
+                app.golfPOIData.removePOI(position)
                 //photosList.removeAt(position)
                 binding.recyclerView.adapter!!.notifyItemRemoved(position)
             }

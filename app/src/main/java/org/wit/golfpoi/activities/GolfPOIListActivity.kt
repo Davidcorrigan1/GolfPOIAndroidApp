@@ -61,7 +61,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
 
     // Implements a menu event handler; if the event is item_add then the GolfPOIActivity is started
     // Implements a logout button which will return to the login screen acticity
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, GolfPOIActivity::class.java)
@@ -87,7 +87,7 @@ class GolfPOIListActivity : AppCompatActivity(), GolfPOIListener {
         }
         return super.onOptionsItemSelected(item)
     }
-
+*/
     // The onGolfPOIClick listener.
     override fun onGolfPOIClick(golfPOI: GolfPOIModel) {
         val launcherIntent = Intent(this, GolfPOIActivity::class.java)

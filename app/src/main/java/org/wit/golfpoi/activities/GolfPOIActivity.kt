@@ -156,7 +156,7 @@ class GolfPOIActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    // Handle the clicking of the menu cancel item. Return to previous activity.
+    /*// Handle the clicking of the menu cancel item. Return to previous activity.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_cancel -> {
@@ -170,7 +170,7 @@ class GolfPOIActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
+*/
     // Register a callback along with the contract that defines its input (and output) types
     private fun registerImagePickerCallback() {
         imageIntentLauncher =

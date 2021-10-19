@@ -2,22 +2,22 @@ package org.wit.golfpoi.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.wit.golfpoi.R
 import org.wit.golfpoi.adapter.GolfPOIAdapter
 import org.wit.golfpoi.adapter.GolfPOIListener
 import org.wit.golfpoi.databinding.FragmentGolfPoiListBinding
 import org.wit.golfpoi.main.MainApp
 import org.wit.golfpoi.models.GolfPOIModel
-import org.wit.golfpoi.models.Location
 import timber.log.Timber.i
 
 
@@ -31,6 +31,8 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
+
+        setHasOptionsMenu(true)
     }
 
     // When the view is created
@@ -40,11 +42,15 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
         _fragBinding = FragmentGolfPoiListBinding.inflate(inflater, container, false)
         val root = fragBinding?.root
 
+        activity?.title = getString(R.string.app_name)
+
         fragBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
         fragBinding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIData.findAllPOIs(),this)
 
         setRecyclerViewItemTouchListener(fragBinding)
         registerRefreshCallback(fragBinding)
+
+        setHasOptionsMenu(true)
 
         return root
     }
@@ -68,6 +74,18 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
     override fun onGolfPOIClick(golfPOI: GolfPOIModel) {
         val action = GolfPoiListFragmentDirections.actionGolfPoiListFragmentToGolfPoiFragment(golfPOI)
         findNavController().navigate(action)
+    }
+
+    // Override method to load the menu resource
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_golfpoilist, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    // Implements a menu event handler;
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+            requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
     // Method to handle deleting an item with a swipe
@@ -99,7 +117,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
         itemTouchHelper.attachToRecyclerView(layout.recyclerView)
     }
 
-    // Register the Callback Function
+    // Register the Callback Function to refresh the recycler
     private fun registerRefreshCallback(layout: FragmentGolfPoiListBinding) {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())

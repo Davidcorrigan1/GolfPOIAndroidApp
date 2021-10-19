@@ -3,10 +3,8 @@ package org.wit.golfpoi.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -15,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.golfpoi.R
@@ -41,6 +40,8 @@ class GolfPoiFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
+
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -109,6 +110,18 @@ class GolfPoiFragment : Fragment() {
             GolfPoiFragment().apply {
                 arguments = Bundle().apply {}
             }
+    }
+
+    // Override method to load the menu resource
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_golfpoi, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    // Implements a menu event handler;
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+            requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
     // Set the listener buttons for choosing image and creating/updating the POI

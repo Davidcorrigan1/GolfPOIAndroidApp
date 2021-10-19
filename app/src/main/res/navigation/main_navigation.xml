@@ -47,6 +47,11 @@
             app:destination="@id/golfLoginFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_golfPoiRegisterFragment_to_golfPoiListFragment"
+            app:destination="@id/golfPoiListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/golfPoiFragment"

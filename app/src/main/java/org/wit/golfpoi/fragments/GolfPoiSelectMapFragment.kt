@@ -35,15 +35,6 @@ class GolfPoiSelectMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // This callback will only be called when MyFragment is at least Started.
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            i("Pressed Back Button Callback before")
-            i("Pressed Back Button Callback after")
-            val action = GolfPoiSelectMapFragmentDirections.actionGolfPoiSelectMapFragmentToGolfPoiFragment(golfPOI)
-            findNavController().navigate(action)
-        }
-
-
 
     }
 
@@ -116,6 +107,9 @@ class GolfPoiSelectMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMar
         location.lat = marker.position.latitude
         location.lng = marker.position.longitude
         location.zoom = map.cameraPosition.zoom
+        golfPOI.lat = location.lat
+        golfPOI.lng = location.lng
+        golfPOI.zoom = location.zoom
         val loc = LatLng(location.lat, location.lng)
         marker.snippet = "GPS: : $loc"
         Timber.i("Moved marker: ${location.lat} ")
@@ -126,5 +120,24 @@ class GolfPoiSelectMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMar
         marker.snippet = "GPS: : $loc"
         return true
     }
+
+    override fun onStart() {
+        super.onStart()
+        requireActivity().onBackPressedDispatcher.addCallback(backPressedCallback)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        backPressedCallback.remove()
+    }
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val action = GolfPoiSelectMapFragmentDirections.actionGolfPoiSelectMapFragmentToGolfPoiFragment(golfPOI)
+            findNavController().navigate(action)
+        }
+
+    }
+
 
 }

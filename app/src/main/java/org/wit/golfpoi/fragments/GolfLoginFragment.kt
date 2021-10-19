@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import org.wit.golfpoi.R
 import org.wit.golfpoi.databinding.FragmentGolfLoginBinding
@@ -61,11 +59,17 @@ class GolfLoginFragment : Fragment() {
 
             if (loggedInUser != null && (loggedInUser.userPassword.equals(layout.editTextPassword.text.toString()))) {
                 app.golfPOIData.setCurrentUser(loggedInUser)
-                //navController.navigate(R.id.golfPoiListFragment)
+                var navController = it.findNavController()
+                navController.navigate(R.id.action_golfLoginFragment_to_golfPoiListFragment)
             } else {
                 i("Cannot find user: ${R.string.login_error_message}")
                 Snackbar.make(it, R.string.login_error_message, Snackbar.LENGTH_LONG).show()
             }
+        }
+
+        layout.btnRegister.setOnClickListener {
+            i("Sending user to register")
+            findNavController().navigate(R.id.action_golfLoginFragment_to_golfPoiRegisterFragment)
         }
     }
 

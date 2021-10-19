@@ -15,15 +15,58 @@
             app:destination="@id/golfPoiListFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_golfLoginFragment_to_golfPoiRegisterFragment"
+            app:destination="@id/golfPoiRegisterFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/golfPoiListFragment"
         android:name="org.wit.golfpoi.fragments.GolfPoiListFragment"
         android:label="fragment_golf_poi_list"
-        tools:layout="@layout/fragment_golf_poi_list" />
+        tools:layout="@layout/fragment_golf_poi_list" >
+        <action
+            android:id="@+id/action_golfPoiListFragment_to_golfPoiFragment"
+            app:destination="@id/golfPoiFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/golfPoiRegisterFragment"
         android:name="org.wit.golfpoi.fragments.GolfPoiRegisterFragment"
         android:label="fragment_golf_poi_register"
-        tools:layout="@layout/fragment_golf_poi_register" />
+        tools:layout="@layout/fragment_golf_poi_register" >
+        <action
+            android:id="@+id/action_golfPoiRegisterFragment_to_golfLoginFragment"
+            app:destination="@id/golfLoginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/golfPoiFragment"
+        android:name="org.wit.golfpoi.fragments.GolfPoiFragment"
+        android:label="fragment_golf_poi"
+        tools:layout="@layout/fragment_golf_poi" >
+        <argument
+            android:name="golfPOI"
+            app:argType="org.wit.golfpoi.models.GolfPOIModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_golfPoiFragment_to_golfPoiListFragment"
+            app:destination="@id/golfPoiListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_golfPoiFragment_to_golfPoiSelectMapFragment2"
+            app:destination="@id/golfPoiSelectMapFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/golfPoiSelectMapFragment"
+        android:name="org.wit.golfpoi.golfPoiSelectMapFragment"
+        android:label="fragment_golf_poi_select_map"
+        tools:layout="@layout/fragment_golf_poi_select_map" />
 </navigation>

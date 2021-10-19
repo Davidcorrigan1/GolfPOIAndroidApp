@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import org.wit.golfpoi.R
 import org.wit.golfpoi.databinding.FragmentGolfPoiRegisterBinding
@@ -80,6 +81,11 @@ class GolfPoiRegisterFragment : Fragment() {
                     .make(it, R.string.register_error_message, Snackbar.LENGTH_LONG)
                     .show()
             }
+        }
+
+        layout.btnLogin.setOnClickListener {
+            Timber.i("Sending user to Login")
+            findNavController().navigate(R.id.action_golfPoiRegisterFragment_to_golfLoginFragment)
         }
     }
 

@@ -29,8 +29,10 @@ class GolfPOIMemStore : GolfPOIStore {
 
     // Update the golfPOI object passed in as reference
     override fun updatePOI(golfPOI: GolfPOIModel) {
+        i("In updatePOI: ${golfPOI}")
         var foundGolfPOI : GolfPOIModel? = golfPOIs.find { p -> p.id == golfPOI.id }
         if (foundGolfPOI != null) {
+            i("in updatePOI after finding POI: ${foundGolfPOI}")
             foundGolfPOI.courseTitle = golfPOI.courseTitle
             foundGolfPOI.courseDescription = golfPOI.courseDescription
             foundGolfPOI.courseProvince = golfPOI.courseProvince

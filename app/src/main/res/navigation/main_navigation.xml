@@ -31,6 +31,11 @@
             app:destination="@id/golfPoiFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_golfPoiListFragment_to_golfPoisOverviewMapFragment"
+            app:destination="@id/golfPoisOverviewMapFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/golfPoiRegisterFragment"
@@ -59,14 +64,34 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
         <action
-            android:id="@+id/action_golfPoiFragment_to_golfPoiSelectMapFragment2"
+            android:id="@+id/action_golfPoiFragment_to_golfPoiSelectMapFragment"
             app:destination="@id/golfPoiSelectMapFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/golfPoiSelectMapFragment"
-        android:name="org.wit.golfpoi.golfPoiSelectMapFragment"
+        android:name="org.wit.golfpoi.fragments.GolfPoiSelectMapFragment"
         android:label="fragment_golf_poi_select_map"
-        tools:layout="@layout/fragment_golf_poi_select_map" />
+        tools:layout="@layout/fragment_golf_poi_select_map">
+        <action
+            android:id="@+id/action_golfPoiSelectMapFragment_to_golfPoiFragment"
+            app:destination="@id/golfPoiFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <argument
+            android:name="golfPOI"
+            app:argType="org.wit.golfpoi.models.GolfPOIModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/golfPoisOverviewMapFragment"
+        android:name="org.wit.golfpoi.fragments.GolfPoisOverviewMapFragment"
+        android:label="fragment_golf_pois_overview_map"
+        tools:layout="@layout/fragment_golf_pois_overview_map" >
+        <action
+            android:id="@+id/action_golfPoisOverviewMapFragment_to_golfPoiListFragment"
+            app:destination="@id/golfPoiListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 </navigation>

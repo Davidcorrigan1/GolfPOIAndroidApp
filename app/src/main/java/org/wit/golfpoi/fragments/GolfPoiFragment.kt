@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.golfpoi.R
@@ -21,6 +22,7 @@ import org.wit.golfpoi.databinding.FragmentGolfPoiBinding
 import org.wit.golfpoi.helpers.showImagePicker
 import org.wit.golfpoi.main.MainApp
 import org.wit.golfpoi.models.GolfPOIModel
+import org.wit.golfpoi.models.Location
 import timber.log.Timber.i
 
 
@@ -31,6 +33,7 @@ class GolfPoiFragment : Fragment() {
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private var _fragBinding: FragmentGolfPoiBinding? = null
     private val fragBinding get() = _fragBinding!!
+    var location = Location("Current", 52.245696, -7.139102, 15f)
     var editFlag = false
     var setProvinces : String = ""
 
@@ -50,7 +53,7 @@ class GolfPoiFragment : Fragment() {
 
         //val golfPOI = arguments as GolfPOIModel
         val golfPOIBundle = arguments
-        val golfPOI: GolfPOIModel? = golfPOIBundle?.getParcelable("golfPOI")
+        golfPOI = golfPOIBundle?.getParcelable("golfPOI")!!
         i("The bundle1: ${golfPOI}")
 
         // creating objects needed for the spinner drop down
@@ -88,8 +91,8 @@ class GolfPoiFragment : Fragment() {
 
         }
         setSpinnerListener(spinner, provinces)
-        registerImagePickerCallback(fragBinding, golfPOI)
-        setButtonListener(fragBinding, golfPOI)
+        registerImagePickerCallback(fragBinding)
+        setButtonListener(fragBinding)
 
         return root
     }
@@ -109,7 +112,7 @@ class GolfPoiFragment : Fragment() {
     }
 
     // Set the listener buttons for choosing image and creating/updating the POI
-    fun setButtonListener (layout: FragmentGolfPoiBinding, golfPOI: GolfPOIModel?) {
+    fun setButtonListener (layout: FragmentGolfPoiBinding) {
         // Listener for the Add Image button
         layout.btnChooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
@@ -143,6 +146,18 @@ class GolfPoiFragment : Fragment() {
 
         }
 
+        // Set the listener for the button to select the location
+        layout.btnGolfPOILocation.setOnClickListener {
+            i ("Set Location Pressed")
+            if (golfPOI!!.lat == 0.0 && golfPOI.lng == 0.0) {
+                golfPOI.lat = location.lat
+                golfPOI.lng = location.lng
+                golfPOI.zoom = location.zoom
+            }
+            val action = GolfPoiFragmentDirections.actionGolfPoiFragmentToGolfPoiSelectMapFragment(golfPOI)
+            findNavController().navigate(action)
+        }
+
     }
 
     fun setSpinnerListener (spinner: Spinner, provinces: Array<String>) {
@@ -161,7 +176,7 @@ class GolfPoiFragment : Fragment() {
     }
 
     // Register a callback along with the contract that defines its input (and output) types
-    private fun registerImagePickerCallback(layout: FragmentGolfPoiBinding, golfPOI: GolfPOIModel?) {
+    private fun registerImagePickerCallback(layout: FragmentGolfPoiBinding) {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->

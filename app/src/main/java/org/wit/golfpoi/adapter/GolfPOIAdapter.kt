@@ -43,7 +43,7 @@ class GolfPOIAdapter constructor(private var golfPOIs: List<GolfPOIModel>,
             // Show default image if none available
             if (golfPOI.image != null) {
                 if (golfPOI.image.equals(Uri.EMPTY)) {
-                    binding.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+                    binding.imageIcon.setImageResource(R.drawable.golflogo)
                 } else {
                     //Picasso.get().load(golfPOI.image).centerCrop().fit().into(binding.imageIcon)
                     Picasso.get().load(golfPOI.image).resize(200,200).into(binding.imageIcon)

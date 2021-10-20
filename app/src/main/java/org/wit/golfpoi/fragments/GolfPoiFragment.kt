@@ -33,7 +33,6 @@ class GolfPoiFragment : Fragment() {
     private var _fragBinding: FragmentGolfPoiBinding? = null
     private val fragBinding get() = _fragBinding!!
     var location = Location("Current", 52.245696, -7.139102, 15f)
-    var editFlag = false
     var setProvinces : String = ""
 
 
@@ -54,7 +53,8 @@ class GolfPoiFragment : Fragment() {
 
         //val golfPOI = arguments as GolfPOIModel
         val golfPOIBundle = arguments
-        if (golfPOIBundle != null) {
+        i("golfPOIBundle: $golfPOIBundle")
+        if (golfPOIBundle?.get("golfPOI") != null) {
             golfPOI = golfPOIBundle.getParcelable("golfPOI")!!
         }
 
@@ -74,11 +74,19 @@ class GolfPoiFragment : Fragment() {
         fragBinding.golfPOIparPicker.minValue = 70
         fragBinding.golfPOIparPicker.maxValue = 72
 
-        if (golfPOI != null) {
+        if (app.golfPOIData.findPOI(golfPOI.id) != null) {
+            fragBinding.btnAdd.setText(R.string.button_saveGolfPOI)
+        }
+
+        if ((golfPOI.courseTitle != "" ) ||
+            (golfPOI.courseDescription != "") ||
+            (golfPOI.coursePar != 0 ) ||
+            (golfPOI.lng.equals(0) || golfPOI.lat.equals(0)) ||
+            (golfPOI.image != Uri.EMPTY)){
+            i("golfPOI.courseTitle:  ${golfPOI.courseTitle}")
             fragBinding.golfPOITitle.setText(golfPOI.courseTitle)
             fragBinding.golfPOIDesc.setText(golfPOI.courseDescription)
             fragBinding.golfPOIparPicker.value = golfPOI.coursePar
-            fragBinding.btnAdd.setText(R.string.button_saveGolfPOI)
             Picasso.get().load(golfPOI.image).into(fragBinding.golfPOIImage)
 
             // If coming from the list of courses and Course image already set, change button text
@@ -90,9 +98,6 @@ class GolfPoiFragment : Fragment() {
             var spinnerPosition : Int = adapter.getPosition(golfPOI.courseProvince)
             spinner.setSelection(spinnerPosition)
             i("Setting the dropdown default from model value")
-
-            editFlag = true
-
         }
         setSpinnerListener(spinner, provinces)
         registerImagePickerCallback(fragBinding)
@@ -107,7 +112,6 @@ class GolfPoiFragment : Fragment() {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() =
             GolfPoiFragment().apply {
@@ -142,8 +146,9 @@ class GolfPoiFragment : Fragment() {
             golfPOI.coursePar = layout.golfPOIparPicker.value
 
             i("Setting the model province to $setProvinces")
+
             if (golfPOI.courseTitle.isNotEmpty() && golfPOI.courseDescription.isNotEmpty()) {
-                if (editFlag) {
+                if (app.golfPOIData.findPOI(golfPOI.id) != null) {
                     i("save Button Pressed ${golfPOI.courseTitle} and ${golfPOI.courseDescription}")
                     i("Course being saved: ${golfPOI}")
                     app.golfPOIData.updatePOI(golfPOI.copy())

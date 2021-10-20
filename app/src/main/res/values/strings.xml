@@ -7,6 +7,7 @@
     <string name="menu_cancelGolfPOI">Cancel</string>
     <string name="menu_logoutGolfPOI">Logout</string>
     <string name="menu_mapGolfPOI">Map</string>
+    <string name="menu_listGolfPOI">List Course</string>
     <string name="prompt_addGolfPOI">Please enter a Title and Desc</string>
     <string name="button_saveGolfPOI">SAVE COURSE DETAILS</string>
     <string name="selected_item">Selected item:</string>

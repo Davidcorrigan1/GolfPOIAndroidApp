@@ -2,12 +2,15 @@ package org.wit.golfpoi.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import org.wit.golfpoi.R
 import org.wit.golfpoi.databinding.HomeBinding
+import org.wit.golfpoi.main.MainApp
 
 class Home : AppCompatActivity() {
 
@@ -33,6 +36,7 @@ class Home : AppCompatActivity() {
 
         val navView = homeBinding.navView
         navView.setupWithNavController(navController)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -59,6 +60,21 @@ class GolfLoginFragment : Fragment() {
                 app.golfPOIData.setCurrentUser(loggedInUser)
                 var navController = it.findNavController()
                 navController.navigate(R.id.action_golfLoginFragment_to_golfPoiListFragment)
+
+                // Setting the logged on user name in the NavDrawer
+                var textUserName = activity?.findViewById<TextView>(R.id.navTitleTextView)
+                if (textUserName != null) {
+                    textUserName.text = app.golfPOIData.getCurrentUser().firstName.toString() + " "
+                                        app.golfPOIData.getCurrentUser().lastName.toString()
+                }
+
+                // Setting the logged on user email in the NavDrawer
+                var textUserEmail = activity?.findViewById<TextView>(R.id.navHeaderTextView)
+                if (textUserEmail != null) {
+                    textUserEmail.text = app.golfPOIData.getCurrentUser().userEmail.toString()
+                }
+
+
             } else {
                 i("Cannot find user: ${R.string.login_error_message}")
                 Snackbar.make(it, R.string.login_error_message, Snackbar.LENGTH_LONG).show()

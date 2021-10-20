@@ -7,20 +7,17 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/menu_addGolfPOI"
         android:orderInCategory="100"
-        app:popupTheme="@style/MyDarkToolbarStyle"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/golfPoisOverviewMapFragment"
         android:title="@string/menu_mapGolfPOI"
         android:orderInCategory="120"
-        app:popupTheme="@style/MyDarkToolbarStyle"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/golfLoginFragment"
         android:title="@string/menu_logoutGolfPOI"
         android:orderInCategory="150"
-        app:popupTheme="@style/MyDarkToolbarStyle"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 </menu>

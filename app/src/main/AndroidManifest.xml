@@ -36,28 +36,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".activities.GolfPOIOverviewMapActivity"
-            android:exported="true"
-            android:label="@string/title_activity_golf_poioverview_map" />
-        <activity
-            android:name=".activities.GolfPOIMapActivity"
-            android:exported="true"
-            android:label="@string/title_activity_golf_poimaps" />
-        <activity
-            android:name=".activities.GolfPOIRegisterActivity"
-            android:exported="true" />
-        <activity
-            android:name=".activities.GolfPOILoginActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".activities.GolfPOIListActivity"
-            android:exported="true" />
-        <activity
-            android:name=".activities.GolfPOIActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

@@ -6,13 +6,11 @@
         android:id="@+id/golfPoiListFragment"
         android:title="@string/menu_cancelGolfPOI"
         android:orderInCategory="100"
-        app:popupTheme="@style/MyDarkToolbarStyle"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/golfLoginFragment"
         android:title="@string/menu_logoutGolfPOI"
         android:orderInCategory="150"
-        app:popupTheme="@style/MyDarkToolbarStyle"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
 </menu>

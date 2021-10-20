@@ -40,7 +40,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
                               container: ViewGroup?,
                               savedInstanceState: Bundle? ): View? {
         _fragBinding = FragmentGolfPoiListBinding.inflate(inflater, container, false)
-        val root = fragBinding?.root
+        val root = fragBinding.root
 
         activity?.title = getString(R.string.app_name)
 
@@ -49,8 +49,6 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
 
         setRecyclerViewItemTouchListener(fragBinding)
         registerRefreshCallback(fragBinding)
-
-        setHasOptionsMenu(true)
 
         return root
     }
@@ -64,7 +62,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             GolfPoiListFragment().apply {
                 arguments = Bundle().apply {}
             }

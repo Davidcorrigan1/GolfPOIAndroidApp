@@ -20,12 +20,10 @@ class GolfLoginFragment : Fragment() {
     lateinit var app: MainApp
     private var _fragBinding: FragmentGolfLoginBinding? = null
     private val fragBinding get() = _fragBinding!!
-    //lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
-        //navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
     }
 
     override fun onCreateView(

@@ -27,7 +27,7 @@ import timber.log.Timber.i
 
 
 class GolfPoiFragment : Fragment() {
-    var golfPOI = GolfPOIModel()
+    var golfPOI: GolfPOIModel = GolfPOIModel()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private var _fragBinding: FragmentGolfPoiBinding? = null
@@ -50,11 +50,14 @@ class GolfPoiFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _fragBinding = FragmentGolfPoiBinding.inflate(inflater, container, false)
-        val root = fragBinding?.root
+        val root = fragBinding.root
 
         //val golfPOI = arguments as GolfPOIModel
         val golfPOIBundle = arguments
-        golfPOI = golfPOIBundle?.getParcelable("golfPOI")!!
+        if (golfPOIBundle != null) {
+            golfPOI = golfPOIBundle.getParcelable("golfPOI")!!
+        }
+
         i("The bundle1: ${golfPOI}")
 
         // creating objects needed for the spinner drop down
@@ -106,7 +109,7 @@ class GolfPoiFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             GolfPoiFragment().apply {
                 arguments = Bundle().apply {}
             }
@@ -162,11 +165,16 @@ class GolfPoiFragment : Fragment() {
         // Set the listener for the button to select the location
         layout.btnGolfPOILocation.setOnClickListener {
             i ("Set Location Pressed")
-            if (golfPOI!!.lat == 0.0 && golfPOI.lng == 0.0) {
+            if (golfPOI.lat == 0.0 && golfPOI.lng == 0.0) {
                 golfPOI.lat = location.lat
                 golfPOI.lng = location.lng
                 golfPOI.zoom = location.zoom
             }
+            // make sure updates to the screen are captured
+            golfPOI.courseTitle = fragBinding.golfPOITitle.text.toString()
+            golfPOI.courseDescription = fragBinding.golfPOIDesc.text.toString()
+            golfPOI.courseProvince = setProvinces
+            golfPOI.coursePar = fragBinding.golfPOIparPicker.value
             val action = GolfPoiFragmentDirections.actionGolfPoiFragmentToGolfPoiSelectMapFragment(golfPOI)
             findNavController().navigate(action)
         }

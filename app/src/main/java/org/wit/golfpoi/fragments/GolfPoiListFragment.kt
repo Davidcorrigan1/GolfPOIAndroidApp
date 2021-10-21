@@ -45,7 +45,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
         activity?.title = getString(R.string.app_name)
 
         fragBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        fragBinding.recyclerView.adapter = GolfPOIAdapter(app.golfPOIData.findAllPOIs(),this)
+        loadGolfPOIs()
 
         setRecyclerViewItemTouchListener(fragBinding)
         registerRefreshCallback(fragBinding)
@@ -119,6 +119,16 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
     private fun registerRefreshCallback(layout: FragmentGolfPoiListBinding) {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { layout.recyclerView.adapter?.notifyDataSetChanged() }
+            { loadGolfPOIs() }
+    }
+
+    // Load Golf courses function
+    private fun loadGolfPOIs() {
+        showGolfPOIs(app.golfPOIData.findAllPOIs())
+    }
+
+    fun showGolfPOIs (golfPOIs: List<GolfPOIModel>) {
+        fragBinding.recyclerView.adapter = GolfPOIAdapter(golfPOIs, this)
+        fragBinding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

@@ -1,7 +1,6 @@
 package org.wit.golfpoi.models
 
 import timber.log.Timber.i
-import java.text.FieldPosition
 
 // Managing golfPOI object id.
 var lastId = 1L

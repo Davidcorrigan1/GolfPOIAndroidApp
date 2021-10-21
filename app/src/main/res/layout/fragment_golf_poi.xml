@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.GolfPOIActivity">
+    tools:context=".fragments.GolfPoiFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,11 +22,6 @@
             app:elevation="0dip"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarAdd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:titleTextColor="@color/colorPrimary" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView

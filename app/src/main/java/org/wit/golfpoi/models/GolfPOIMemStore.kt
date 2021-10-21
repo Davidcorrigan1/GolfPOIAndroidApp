@@ -4,7 +4,7 @@ import timber.log.Timber.i
 import java.text.FieldPosition
 
 // Managing golfPOI object id.
-var lastId = 0L
+var lastId = 1L
 internal fun getId(): Long {
     return lastId++
 }
@@ -27,10 +27,17 @@ class GolfPOIMemStore : GolfPOIStore {
         logAll()
     }
 
+    override fun findPOI(id: Long): GolfPOIModel? {
+        var foundGolfPOI : GolfPOIModel? = golfPOIs.find { p -> p.id == id }
+        return foundGolfPOI
+    }
+
     // Update the golfPOI object passed in as reference
     override fun updatePOI(golfPOI: GolfPOIModel) {
+        i("In updatePOI: ${golfPOI}")
         var foundGolfPOI : GolfPOIModel? = golfPOIs.find { p -> p.id == golfPOI.id }
         if (foundGolfPOI != null) {
+            i("in updatePOI after finding POI: ${foundGolfPOI}")
             foundGolfPOI.courseTitle = golfPOI.courseTitle
             foundGolfPOI.courseDescription = golfPOI.courseDescription
             foundGolfPOI.courseProvince = golfPOI.courseProvince

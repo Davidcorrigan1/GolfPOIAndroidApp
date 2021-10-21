@@ -7,7 +7,7 @@
     android:background="@color/login_bk_color"
     android:focusableInTouchMode="true"
     android:gravity="center"
-    tools:context=".activities.GolfPOIRegisterActivity">
+    tools:context=".fragments.GolfLoginFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="Register \nFor an \nAccount?" />
+                    android:text="Already \nhave an \nAccount?" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -55,32 +55,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputFirstName"
-                style="@style/parent"
-                android:layout_marginTop="20dp">
-
-                <EditText
-                    android:id="@+id/editTextFirstName"
-                    style="@style/modifiedEditText"
-                    android:hint="@string/register_firstname_hint"
-                    android:inputType="textPersonName"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLastName"
-                style="@style/parent"
-                android:layout_marginTop="20dp">
-
-                <EditText
-                    android:id="@+id/editTextLastName"
-                    style="@style/modifiedEditText"
-                    android:hint="@string/register_lastname_hint"
-                    android:inputType="textPersonName"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
                 style="@style/parent"
                 android:layout_marginTop="20dp">
@@ -93,6 +67,17 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/colorAccentLight"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Login"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnRegister"
@@ -102,21 +87,10 @@
                 android:background="@color/colorAccentLight"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Register"
+                android:text="To Register Screen"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@color/colorAccentLight"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="To Login Screen"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
 
 
         </LinearLayout>

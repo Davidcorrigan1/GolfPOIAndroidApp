@@ -45,6 +45,7 @@ class GolfPOIAdapter constructor(private var golfPOIs: List<GolfPOIModel>,
                 if (golfPOI.image.equals(Uri.EMPTY)) {
                     binding.imageIcon.setImageResource(R.drawable.golflogo)
                 } else {
+                    i("golfPOI Image: ${golfPOI.image}")
                     //Picasso.get().load(golfPOI.image).centerCrop().fit().into(binding.imageIcon)
                     Picasso.get().load(golfPOI.image).resize(200,200).into(binding.imageIcon)
                 }

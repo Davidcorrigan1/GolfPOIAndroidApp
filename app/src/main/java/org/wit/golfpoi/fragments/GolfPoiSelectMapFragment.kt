@@ -86,6 +86,7 @@ class GolfPoiSelectMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMar
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
         map.setOnMarkerDragListener(this)
+        map.setOnMarkerClickListener(this)
     }
 
     fun onBackPressed() {
@@ -118,7 +119,7 @@ class GolfPoiSelectMapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMar
     override fun onMarkerClick(marker: Marker): Boolean {
         val loc = LatLng(location.lat, location.lng)
         marker.snippet = "GPS: : $loc"
-        return true
+        return false
     }
 
     override fun onStart() {

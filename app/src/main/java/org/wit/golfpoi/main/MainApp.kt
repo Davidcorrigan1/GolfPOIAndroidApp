@@ -2,10 +2,7 @@ package org.wit.golfpoi.main
 
 import android.app.Application
 import android.net.Uri
-import org.wit.golfpoi.models.GolfPOIJSONStore
-import org.wit.golfpoi.models.GolfPOIModel
-import org.wit.golfpoi.models.GolfPOIStore
-import org.wit.golfpoi.models.GolfUserModel
+import org.wit.golfpoi.models.*
 import timber.log.Timber
 import timber.log.Timber.i
 import java.time.LocalDate

@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import org.wit.golfpoi.helpers.*
 import timber.log.Timber
 import java.lang.reflect.Type
+import java.time.LocalDate
 import java.util.*
 
 // This is the combined
@@ -14,6 +15,7 @@ const val JSON_FILE_DATA = "golfPOIData.json"
 
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())
+    .registerTypeAdapter(LocalDate::class.java, DateParser())
     .create()
 val listTypeDATA: Type = object : TypeToken<GolfPOIDataModel>() {}.type
 
@@ -144,6 +146,24 @@ class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
 
     override fun serialize(
         src: Uri?,
+        typeOfSrc: Type?,
+        context: JsonSerializationContext?
+    ): JsonElement {
+        return JsonPrimitive(src.toString())
+    }
+}
+
+class DateParser : JsonDeserializer<LocalDate>,JsonSerializer<LocalDate> {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): LocalDate {
+        return LocalDate.parse(json?.asString)
+    }
+
+    override fun serialize(
+        src: LocalDate?,
         typeOfSrc: Type?,
         context: JsonSerializationContext?
     ): JsonElement {

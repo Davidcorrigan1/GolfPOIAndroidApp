@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -26,6 +25,7 @@ class GolfLoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
+
     }
 
     override fun onCreateView(
@@ -65,7 +65,7 @@ class GolfLoginFragment : Fragment() {
                 // Setting the logged on user name in the NavDrawer
                 var textUserName = activity?.findViewById<TextView>(R.id.navTitleTextView)
                 if (textUserName != null) {
-                    textUserName.text = app.golfPOIData.getCurrentUser().firstName.toString() + " "
+                    textUserName.text = app.golfPOIData.getCurrentUser().firstName.toString() + " " +
                                         app.golfPOIData.getCurrentUser().lastName.toString()
                 }
 

@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import org.wit.golfpoi.R
@@ -69,6 +71,19 @@ class GolfPoiRegisterFragment : Fragment() {
                     user.loginCount = 1
                     app.golfPOIData.createUser(user)
                     app.golfPOIData.setCurrentUser(user)
+                    // Setting the logged on user name in the NavDrawer
+                    var textUserName = activity?.findViewById<TextView>(R.id.navTitleTextView)
+                    if (textUserName != null) {
+                        textUserName.text = app.golfPOIData.getCurrentUser().firstName.toString() + " " +
+                                app.golfPOIData.getCurrentUser().lastName.toString()
+                    }
+
+                    // Setting the logged on user email in the NavDrawer
+                    var textUserEmail = activity?.findViewById<TextView>(R.id.navHeaderTextView)
+                    if (textUserEmail != null) {
+                        textUserEmail.text = app.golfPOIData.getCurrentUser().userEmail.toString()
+                    }
+                    findNavController().navigate(R.id.action_golfPoiRegisterFragment_to_golfPoiListFragment)
 
                 } else {
                     Snackbar

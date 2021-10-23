@@ -22,9 +22,9 @@ class MainApp : Application() {
         if (golfPOIData.findUser("davidcorrigan2@gmail.com") == null) {
 
             golfPOIData.createUser(GolfUserModel(2000, "davidcorrigan1@gmail.com","Pass1976", "David", "Corrigan", LocalDate.now(), 1 ))
-            golfPOIData.createUser(GolfUserModel(2000, "davidcorrigan2@gmail.com","Pass1976", "Ben", "Corrigan", LocalDate.now(), 1 ))
+            golfPOIData.createUser(GolfUserModel(2000, "bencorrigan1@gmail.com","Pass1976", "Ben", "Corrigan", LocalDate.now(), 1 ))
 
-            val testUser = golfPOIData.findUser("davidcorrigan2@gmail.com")
+            val testUser = golfPOIData.findUser("bencorrigan1@gmail.com")
 
             if (testUser != null) {
                 golfPOIData.createPOI(GolfPOIModel(1000,"Wexford GOlf Course", "Beautiful par 72 in the west of this beautiful county. The greens on this course are like carpet and the fairways are immalculate.", "Munster", 72, Uri.EMPTY, 52.25260421972287, -7.338150110840797, 16f, testUser.id))

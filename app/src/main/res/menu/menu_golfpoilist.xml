@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.Home">
 
     <item
         android:id="@+id/golfPoiFragment"
@@ -19,5 +21,12 @@
         android:id="@+id/golfLoginFragment"
         android:title="@string/menu_logoutGolfPOI"
         android:orderInCategory="150"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/golfPoiListFragment"
+        android:title="Search"
+        android:orderInCategory="200"
+        app:actionViewClass="android.widget.SearchView"
         app:showAsAction="never"/>
 </menu>

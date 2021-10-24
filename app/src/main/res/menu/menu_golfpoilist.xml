@@ -24,9 +24,10 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/golfPoiListFragment"
-        android:title="Search"
+        android:id="@+id/golfPoiSearch"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title=""
         android:orderInCategory="200"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="never"/>
+        app:showAsAction="collapseActionView|ifRoom"/>
 </menu>

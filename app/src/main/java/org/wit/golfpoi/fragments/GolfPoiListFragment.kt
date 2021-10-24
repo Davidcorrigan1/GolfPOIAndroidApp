@@ -82,7 +82,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
     // Override method to load the menu resource
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_golfpoilist, menu)
-        val searchItem: MenuItem = menu.findItem(R.id.golfPoiListFragment)
+        val searchItem: MenuItem = menu.findItem(R.id.golfPoiSearch)
         val searchManager: SearchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
 
 
@@ -98,6 +98,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
 
             override fun onQueryTextChange(query: String?): Boolean {
                 i("onQueryTextSubmit: $query")
+                query?.let { loadGolfPOIs(it) }
                 return true
             }
 
@@ -109,7 +110,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
 
     // Implements a menu event handler except for search
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.golfPoiListFragment) {
+        return if (item.itemId == R.id.golfPoiSearch) {
             false
         } else {
             NavigationUI.onNavDestinationSelected(
@@ -158,6 +159,21 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
     // Load Golf courses function
     private fun loadGolfPOIs() {
         showGolfPOIs(app.golfPOIData.findAllPOIs())
+    }
+
+    // Load Golf courses which match the query string entered
+    private fun loadGolfPOIs(query: String) {
+        if (query != "") {
+            var allGolfCourse = app.golfPOIData.findAllPOIs()
+            i("allCoursesLength: ${allGolfCourse.size}")
+            var searchResults = allGolfCourse.filter { it.courseTitle.lowercase().contains(query.lowercase()) ||
+                                                       it.courseDescription.lowercase().contains(query.lowercase()) ||
+                                                       it.courseProvince.lowercase().contains(query.lowercase())}
+            i("searchResultsLength: ${searchResults.size}")
+            showGolfPOIs(searchResults)
+        } else {
+            loadGolfPOIs()
+        }
     }
 
     fun showGolfPOIs (golfPOIs: List<GolfPOIModel>) {

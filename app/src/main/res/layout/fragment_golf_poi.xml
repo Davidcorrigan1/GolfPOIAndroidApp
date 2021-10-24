@@ -47,7 +47,7 @@
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorAccent"
-                    android:textSize="14sp" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/golfPOIDesc"
@@ -61,7 +61,7 @@
                     android:maxLines="5"
                     android:padding="8dp"
                     android:textColor="@color/colorAccent"
-                    android:textSize="14sp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                         android:layout_weight="3"
                         android:text="Province"
                         android:textColor="@color/colorAccent"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <Spinner
                         android:id="@+id/provinceSpinner"
@@ -88,6 +88,7 @@
                         android:layout_margin="8dp"
                         android:padding="8dp"
                         android:layout_weight="1"
+                        android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="@id/golfPOIProvinceText"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
@@ -108,7 +109,7 @@
                         android:text="Course \nPar"
                         android:layout_weight="3"
                         android:textColor="@color/colorAccent"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <NumberPicker
                         android:id="@+id/golfPOIparPicker"

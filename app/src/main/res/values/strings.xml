@@ -17,7 +17,7 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="register_firstname_hint">First Name</string>
-    <string name="register_lastname_hint">Surname Name</string>
+    <string name="register_lastname_hint">Last Name</string>
     <string name="button_location">Set Course Location</string>
     <string name="action_share">Share</string>
     <string name="action_send">Send</string>

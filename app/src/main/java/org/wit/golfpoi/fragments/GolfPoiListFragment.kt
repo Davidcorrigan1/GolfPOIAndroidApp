@@ -1,8 +1,11 @@
 package org.wit.golfpoi.fragments
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.activity.result.ActivityResultLauncher
@@ -22,11 +25,12 @@ import org.wit.golfpoi.models.GolfPOIModel
 import timber.log.Timber.i
 
 
-class GolfPoiListFragment : Fragment(), GolfPOIListener {
+class GolfPoiListFragment : Fragment(), GolfPOIListener{
     lateinit var app: MainApp
     private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
     private var _fragBinding: FragmentGolfPoiListBinding? = null
     private val fragBinding get() = _fragBinding!!
+    private var searchView: SearchView? = null
 
     // When the Fragment is created
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,13 +82,42 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
     // Override method to load the menu resource
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_golfpoilist, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.golfPoiSearch)
+        val searchManager: SearchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
+
+        searchView = searchItem.actionView as SearchView
+
+        searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+
+        searchView!!.setOnQueryTextListener (object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(newText: String?): Boolean {
+                i("onQueryTextCHange: $newText")
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                i("onQueryTextSubmit: $query")
+                query?.let { loadGolfPOIs(it) }
+                return true
+            }
+
+        })
+
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    // Implements a menu event handler;
+    // Implements a menu event handler except for search
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item,
-            requireView().findNavController()) || super.onOptionsItemSelected(item)
+        return if (item.itemId == R.id.golfPoiSearch) {
+            false
+        } else {
+            NavigationUI.onNavDestinationSelected(
+                item,
+                requireView().findNavController()
+            ) || super.onOptionsItemSelected(item)
+        }
     }
 
     // Method to handle deleting an item with a swipe
@@ -128,8 +161,24 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener {
         showGolfPOIs(app.golfPOIData.findAllPOIs())
     }
 
+    // Load Golf courses which match the query string entered
+    private fun loadGolfPOIs(query: String) {
+        if (query != "") {
+            var allGolfCourse = app.golfPOIData.findAllPOIs()
+            i("allCoursesLength: ${allGolfCourse.size}")
+            var searchResults = allGolfCourse.filter { it.courseTitle.lowercase().contains(query.lowercase()) ||
+                                                       it.courseDescription.lowercase().contains(query.lowercase()) ||
+                                                       it.courseProvince.lowercase().contains(query.lowercase())}
+            i("searchResultsLength: ${searchResults.size}")
+            showGolfPOIs(searchResults)
+        } else {
+            loadGolfPOIs()
+        }
+    }
+
     fun showGolfPOIs (golfPOIs: List<GolfPOIModel>) {
         fragBinding.recyclerView.adapter = GolfPOIAdapter(golfPOIs, this)
         fragBinding.recyclerView.adapter?.notifyDataSetChanged()
     }
+
 }

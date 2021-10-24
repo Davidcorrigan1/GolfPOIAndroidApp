@@ -93,7 +93,7 @@ class GolfPOIJSONStore(private val context: Context) : GolfPOIStore {
     // password matches the supplied. If match return the user object else null.
     override fun findUser(email: String): GolfUserModel? {
         Timber.i("user entered Email: $email")
-        var userFound: GolfUserModel? = golfPOIData.users.find{ it.userEmail == email }
+        var userFound: GolfUserModel? = golfPOIData.users.find{ it.userEmail.lowercase() == email.lowercase() }
         Timber.i("userFound: $userFound")
         if (userFound != null) {
             return userFound

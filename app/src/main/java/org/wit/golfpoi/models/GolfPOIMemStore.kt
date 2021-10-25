@@ -31,6 +31,11 @@ class GolfPOIMemStore : GolfPOIStore {
         return foundGolfPOI
     }
 
+    // Find all Golf Course entries created by the id passed in
+    override fun findByCreatedByUserId(id: Long): List<GolfPOIModel> {
+        return golfPOIs.filter { p -> p.createdById == id}
+    }
+
     // Update the golfPOI object passed in as reference
     override fun updatePOI(golfPOI: GolfPOIModel) {
         i("In updatePOI: ${golfPOI}")

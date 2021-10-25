@@ -81,6 +81,11 @@ class GolfPOIJSONStore(private val context: Context) : GolfPOIStore {
         return golfPOIData.golfPOIs.find { p -> p.id == id }
     }
 
+    // Find all Golf Course entries created by the id passed in
+    override fun findByCreatedByUserId(id: Long): List<GolfPOIModel> {
+        return golfPOIData.golfPOIs.filter { p -> p.createdById == id}
+    }
+
     // Generate a user id and add user passed in to the array and update JSON File
     override fun createUser(user: GolfUserModel) {
         user.id = generateRandomId()

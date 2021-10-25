@@ -7,6 +7,7 @@ interface GolfPOIStore {
     fun updatePOI(golfPOI: GolfPOIModel)
     fun removePOI(position: Int)
     fun findPOI(id: Long): GolfPOIModel?
+    fun findByCreatedByUserId(id: Long): List<GolfPOIModel>
 
     fun createUser(user: GolfUserModel)
     fun findUser(email: String): GolfUserModel?

@@ -29,6 +29,12 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/golfPoiListFragment"
+        android:title="All Golf Courses"
+        android:orderInCategory="170"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/golfPoiSearch"
         android:icon="@android:drawable/ic_menu_search"
         android:title=""

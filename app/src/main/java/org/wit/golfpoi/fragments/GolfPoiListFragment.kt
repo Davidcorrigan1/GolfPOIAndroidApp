@@ -80,6 +80,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
     }
 
     // Override method to load the menu resource
+    // This handles the search bar functionality and filtering the course list
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_golfpoilist, menu)
         val searchItem: MenuItem = menu.findItem(R.id.golfPoiSearch)
@@ -103,20 +104,19 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
             }
 
         })
-
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     // Implements a menu event handler except for search
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.golfPoiSearch) {
-            false
+        if (item.itemId == R.id.golfPoiSearch) {
+            return false
+        } else if (item.itemId == R.id.golfPoiUserFilter) {
+            loadGolfPOIs(app.golfPOIData.getCurrentUser().id)
+            return false
         } else {
-            NavigationUI.onNavDestinationSelected(
-                item,
-                requireView().findNavController()
-            ) || super.onOptionsItemSelected(item)
+            return NavigationUI.onNavDestinationSelected(item,
+                   requireView().findNavController()) || super.onOptionsItemSelected(item)
         }
     }
 
@@ -161,6 +161,12 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
         showGolfPOIs(app.golfPOIData.findAllPOIs())
     }
 
+    // Load Golf course which were created by the current user
+    private fun loadGolfPOIs(id: Long) {
+        var userFilteredCourses = app.golfPOIData.findByCreatedByUserId(id)
+        showGolfPOIs(userFilteredCourses)
+    }
+
     // Load Golf courses which match the query string entered
     private fun loadGolfPOIs(query: String) {
         if (query != "") {
@@ -176,6 +182,7 @@ class GolfPoiListFragment : Fragment(), GolfPOIListener{
         }
     }
 
+    // Bind data to adapter recycler view.
     fun showGolfPOIs (golfPOIs: List<GolfPOIModel>) {
         fragBinding.recyclerView.adapter = GolfPOIAdapter(golfPOIs, this)
         fragBinding.recyclerView.adapter?.notifyDataSetChanged()

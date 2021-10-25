@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/golfLoginFragment"
         android:name="org.wit.golfpoi.fragments.GolfLoginFragment"
-        android:label="fragment_golf_login"
+        android:label="Login"
         tools:layout="@layout/fragment_golf_login" >
         <action
             android:id="@+id/action_golfLoginFragment_to_golfPoiListFragment"
@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/golfPoiListFragment"
         android:name="org.wit.golfpoi.fragments.GolfPoiListFragment"
-        android:label="fragment_golf_poi_list"
+        android:label="Golf Course List"
         tools:layout="@layout/fragment_golf_poi_list" >
         <action
             android:id="@+id/action_golfPoiListFragment_to_golfPoiFragment"
@@ -40,7 +40,7 @@
     <fragment
         android:id="@+id/golfPoiRegisterFragment"
         android:name="org.wit.golfpoi.fragments.GolfPoiRegisterFragment"
-        android:label="fragment_golf_poi_register"
+        android:label="Register"
         tools:layout="@layout/fragment_golf_poi_register" >
         <action
             android:id="@+id/action_golfPoiRegisterFragment_to_golfLoginFragment"
@@ -56,7 +56,7 @@
     <fragment
         android:id="@+id/golfPoiFragment"
         android:name="org.wit.golfpoi.fragments.GolfPoiFragment"
-        android:label="fragment_golf_poi"
+        android:label="Add Golf Course Details"
         tools:layout="@layout/fragment_golf_poi" >
         <argument
             android:name="golfPOI"
@@ -75,7 +75,7 @@
     <fragment
         android:id="@+id/golfPoiSelectMapFragment"
         android:name="org.wit.golfpoi.fragments.GolfPoiSelectMapFragment"
-        android:label="fragment_golf_poi_select_map"
+        android:label="Select Course Location"
         tools:layout="@layout/fragment_golf_poi_select_map">
         <action
             android:id="@+id/action_golfPoiSelectMapFragment_to_golfPoiFragment"
@@ -89,7 +89,7 @@
     <fragment
         android:id="@+id/golfPoisOverviewMapFragment"
         android:name="org.wit.golfpoi.fragments.GolfPoisOverviewMapFragment"
-        android:label="fragment_golf_pois_overview_map"
+        android:label="Course Location Overview Map"
         tools:layout="@layout/fragment_golf_pois_overview_map" >
         <action
             android:id="@+id/action_golfPoisOverviewMapFragment_to_golfPoiListFragment"

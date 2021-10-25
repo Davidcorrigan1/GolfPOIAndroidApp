@@ -44,4 +44,8 @@ class Home : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    interface ActionBarTitleSetter {
+        fun setTitle(title: String?)
+    }
+
 }

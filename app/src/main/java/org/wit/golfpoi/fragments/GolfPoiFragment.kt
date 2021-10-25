@@ -17,6 +17,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.golfpoi.R
+import org.wit.golfpoi.activities.Home
 import org.wit.golfpoi.databinding.FragmentGolfPoiBinding
 import org.wit.golfpoi.helpers.showImagePicker
 import org.wit.golfpoi.main.MainApp

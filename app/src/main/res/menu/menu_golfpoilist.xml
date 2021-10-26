@@ -18,11 +18,6 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/golfLoginFragment"
-        android:title="@string/menu_logoutGolfPOI"
-        android:orderInCategory="150"
-        app:showAsAction="never"/>
-    <item
         android:id="@+id/golfPoiUserFilter"
         android:title="My Golf Courses"
         android:orderInCategory="160"
@@ -41,4 +36,10 @@
         android:orderInCategory="200"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom"/>
+
+    <item
+        android:id="@+id/golfLoginFragment"
+        android:title="@string/menu_logoutGolfPOI"
+        android:orderInCategory="250"
+        app:showAsAction="never"/>
 </menu>

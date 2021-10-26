@@ -44,6 +44,7 @@ class GolfPOIJSONStore(private val context: Context) : GolfPOIStore {
     // Create a new Golf Course in the List and update the JSON file
     override fun createPOI(golfPOI: GolfPOIModel) {
         golfPOI.id = generateRandomId()
+        golfPOI.createdById = currentUser.id
         golfPOIData.golfPOIs.add(golfPOI)
         serialize(JSON_FILE_DATA, listTypeDATA)
     }
